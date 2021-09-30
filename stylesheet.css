@@ -129,3 +129,50 @@ name {
 span.highlight {
   background-color: #ffffd0;
 }
+
+
+
+
+
+/* stuff for sidebar */ 
+
+#sidebar {
+  float: left;
+  width: 180px;
+  margin: 0 10px 0 0;
+  padding: 10px;
+  border-right: 1px solid #eee;
+  color: #666;
+}
+
+#sidebar a {
+  color: #333;
+  background: inherit;
+}
+
+#sidebar a:hover {
+  color: #B29B35;
+  background: inherit;
+}
+
+#sidebar {
+  float: left;
+  width: 180px;
+  margin: 0 10px 0 0;
+  padding: 10px;
+  border-right: 1px solid #eee;
+  color: #666;
+}
+
+#sidebar a {
+  color: #333;
+  background: inherit;
+}
+
+#sidebar a:hover {
+  color: #B29B35;
+  background: inherit;
+}
+
+
+
