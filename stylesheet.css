@@ -143,12 +143,14 @@ span.highlight {
   padding: 10px;
   border-right: 1px solid #eee;
   color: #666;
-  background: #A5D0D3;
+  background: #ac4142;
+  margin-bottom: -5000px; /* any large number will do */
+  padding-bottom: 5000px; 
 }
 
-.theme-base-08 .sidebar {
-  background-color: #ac4142;
-}
+.container { 
+  overflow: hidden;
+} 
 
 /*
 
