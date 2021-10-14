@@ -145,7 +145,7 @@ span.highlight {
   color: #666;
   /*background: #ac4142;*/
   margin-bottom: -5000px; /* any large number will do */
-  padding-bottom: 5000px; 
+  /* padding-bottom: 5000px; */
 }
 
 .container { 
