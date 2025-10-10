@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple 9-Char Wordle</title>
   <style>
     :root{
       --box: #e5e7eb;
@@ -60,27 +59,20 @@
     .state-green{ background: var(--green); color: white; border-color: var(--green); }
     .state-yellow{ background: var(--yellow); color: #1f2937; border-color: var(--yellow); }
     .state-red{ background: var(--red); color: white; border-color: var(--red); }
-    .message{ margin-top: 1rem; font-weight: 700; min-height: 1.5rem; }
-    .counter{ margin-top: .5rem; font-weight: 600; color: var(--text); }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="row" id="row"></div>
-    <div id="msg" class="message"></div>
-    <div id="counter" class="counter">Attempts: 0</div>
   </div>
 
   <script>
-    const ANSWER = "071219A24";
-    const SUCCESS_TEXT = "";
-    const row = document.getElementById('row');
-    const msg = document.getElementById('msg');
-    const counterEl = document.getElementById('counter');
-    let attempts = 0;
-
+    const ANSWER = "WORDLE123";
     const LEN = 9;
     const ALLOWED = /^[A-Z0-9]$/;
+
+    const row = document.getElementById('row');
+
     const inputs = Array.from({ length: LEN }, (_, i) => {
       const cell = document.createElement('div');
       cell.className = 'cell';
@@ -99,32 +91,24 @@
       const input = e.target;
       const v = (input.value || '').toUpperCase();
       if(!v){
-        // If user deletes via selection + typing nothing, re-check fill state
-        if(!isFilled()){ clearStates(); msg.textContent=''; }
+        if(!isFilled()){ clearStates(); }
         return;
       }
       const ch = v.slice(-1);
       if(!ALLOWED.test(ch)){
         input.value = '';
-        if(!isFilled()){ clearStates(); msg.textContent=''; }
+        if(!isFilled()){ clearStates(); }
         return;
       }
       input.value = ch;
       const idx = inputs.indexOf(input);
       if(idx < LEN-1) inputs[idx+1].focus();
 
-      // Only show colors when fully filled; otherwise clear colors
       if(isFilled()) {
         evaluate();
       } else {
         clearStates();
-        msg.textContent='';
       }
-    }
-      input.value = ch;
-      const idx = inputs.indexOf(input);
-      if(idx < LEN-1) inputs[idx+1].focus();
-      if(isFilled()) evaluate();
     }
 
     function onKey(e){
@@ -133,8 +117,7 @@
       if(e.key === 'Backspace'){
         if(input.value){ input.value = ''; }
         else if(idx > 0){ inputs[idx-1].focus(); inputs[idx-1].value = ''; }
-        // After any deletion, if not filled, reset colors
-        if(!isFilled()){ clearStates(); msg.textContent=''; }
+        if(!isFilled()){ clearStates(); }
       } else if(e.key === 'Enter'){
         if(isFilled()) evaluate();
       } else if(e.key === 'ArrowLeft' && idx > 0){
@@ -143,20 +126,16 @@
         inputs[idx+1].focus();
       }
     }
-        else if(idx > 0){ inputs[idx-1].focus(); inputs[idx-1].value = ''; }
-      } else if(e.key === 'Enter' && isFilled()){
-        evaluate();
-      }
+
+    function isFilled(){
+      return inputs.every(i => i.value && ALLOWED.test(i.value.toUpperCase()));
     }
 
-    function isFilled(){ return inputs.every(i => i.value && ALLOWED.test(i.value.toUpperCase())); }
-
-    function clearStates(){ Array.from(row.children).forEach(c => c.className='cell'); }
+    function clearStates(){
+      Array.from(row.children).forEach(c => c.className = 'cell');
+    }
 
     function evaluate(){
-      attempts++;
-      counterEl.textContent = `Attempts: ${attempts}`;
-
       clearStates();
       const guess = inputs.map(i => i.value.toUpperCase());
       const target = ANSWER.toUpperCase().split('');
@@ -166,20 +145,26 @@
       const cells = Array.from(row.children);
       const states = Array(LEN).fill('');
 
+      // Greens
       for(let i=0;i<LEN;i++){
-        if(guess[i]===target[i]){ states[i]='green'; counts.set(guess[i], counts.get(guess[i])-1); }
+        if(guess[i]===target[i]){
+          states[i]='green';
+          counts.set(guess[i], counts.get(guess[i])-1);
+        }
       }
-
+      // Yellows / Reds
       for(let i=0;i<LEN;i++){
         if(states[i]) continue;
         const ch = guess[i];
-        if(counts.get(ch)>0){ states[i]='yellow'; counts.set(ch, counts.get(ch)-1); }
-        else states[i]='red';
+        if(counts.get(ch)>0){
+          states[i]='yellow';
+          counts.set(ch, counts.get(ch)-1);
+        } else {
+          states[i]='red';
+        }
       }
 
       for(let i=0;i<LEN;i++) cells[i].classList.add(`state-${states[i]}`);
-
-      if(states.every(s=>s==='green')) msg.textContent = SUCCESS_TEXT; else msg.textContent='';
     }
   </script>
 </body>
