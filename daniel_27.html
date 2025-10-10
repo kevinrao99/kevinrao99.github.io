@@ -98,12 +98,29 @@
     function onType(e){
       const input = e.target;
       const v = (input.value || '').toUpperCase();
-      if(!v) return;
+      if(!v){
+        // If user deletes via selection + typing nothing, re-check fill state
+        if(!isFilled()){ clearStates(); msg.textContent=''; }
+        return;
+      }
       const ch = v.slice(-1);
       if(!ALLOWED.test(ch)){
         input.value = '';
+        if(!isFilled()){ clearStates(); msg.textContent=''; }
         return;
       }
+      input.value = ch;
+      const idx = inputs.indexOf(input);
+      if(idx < LEN-1) inputs[idx+1].focus();
+
+      // Only show colors when fully filled; otherwise clear colors
+      if(isFilled()) {
+        evaluate();
+      } else {
+        clearStates();
+        msg.textContent='';
+      }
+    }
       input.value = ch;
       const idx = inputs.indexOf(input);
       if(idx < LEN-1) inputs[idx+1].focus();
@@ -115,6 +132,17 @@
       const idx = inputs.indexOf(input);
       if(e.key === 'Backspace'){
         if(input.value){ input.value = ''; }
+        else if(idx > 0){ inputs[idx-1].focus(); inputs[idx-1].value = ''; }
+        // After any deletion, if not filled, reset colors
+        if(!isFilled()){ clearStates(); msg.textContent=''; }
+      } else if(e.key === 'Enter'){
+        if(isFilled()) evaluate();
+      } else if(e.key === 'ArrowLeft' && idx > 0){
+        inputs[idx-1].focus();
+      } else if(e.key === 'ArrowRight' && idx < LEN-1){
+        inputs[idx+1].focus();
+      }
+    }
         else if(idx > 0){ inputs[idx-1].focus(); inputs[idx-1].value = ''; }
       } else if(e.key === 'Enter' && isFilled()){
         evaluate();
