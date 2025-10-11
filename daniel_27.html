@@ -31,7 +31,7 @@
     }
     .row{
       display: grid;
-      grid-template-columns: repeat(9, 56px);
+      grid-template-columns: repeat(var(--cols, 9), 56px);
       gap: .5rem;
       justify-content: center;
       justify-items: center;
@@ -68,10 +68,14 @@
 
   <script>
     const ANSWER = "REMORA";
-    const LEN = 6;
+    const LEN = ANSWER.length;
     const ALLOWED = /^[A-Z0-9]$/;
 
     const row = document.getElementById('row');
+
+    // Make grid length dynamic based on ANSWER length and keep centered
+    row.style.setProperty('--cols', LEN);
+    row.style.gridTemplateColumns = `repeat(${LEN}, 56px)`;
 
     const inputs = Array.from({ length: LEN }, (_, i) => {
       const cell = document.createElement('div');
