@@ -31,7 +31,7 @@
     }
     .row{
       display: grid;
-      grid-template-columns: repeat(var(--cols, 9), 56px);
+      grid-template-columns: repeat(var(--cols, 6), 67px);
       gap: .5rem;
       justify-content: center;
       justify-items: center;
@@ -39,11 +39,11 @@
       width: auto;
     }
     .cell{
-      width: 56px; height: 56px;
+      width: 67px; height: 67px;
       display: grid; place-items: center;
       border: 2px solid var(--box);
       border-radius: .5rem;
-      font-weight: 800; font-size: 1.5rem;
+      font-weight: 800; font-size: 1.8rem;
       background: white;
       transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
       user-select: none;
@@ -67,17 +67,21 @@
   </div>
 
   <script>
-    const ANSWER = "REMORA";
-    const LEN = ANSWER.length;
+    // Hardcoded keywords
+    const ANSWER1 = "MYSTIC";
+    const ANSWER2 = "REMORA";
+    if (ANSWER1.length !== ANSWER2.length) {
+      throw new Error('ANSWER1 and ANSWER2 must be the same length.');
+    }
+    const LEN = ANSWER1.length;
     const ALLOWED = /^[A-Z0-9]$/;
 
     const row = document.getElementById('row');
-
-    // Make grid length dynamic based on ANSWER length and keep centered
     row.style.setProperty('--cols', LEN);
-    row.style.gridTemplateColumns = `repeat(${LEN}, 56px)`;
+    row.style.gridTemplateColumns = `repeat(${LEN}, 67px)`;
 
-    const inputs = Array.from({ length: LEN }, (_, i) => {
+    // Build inputs dynamically based on LEN
+    const inputs = Array.from({ length: LEN }, () => {
       const cell = document.createElement('div');
       cell.className = 'cell';
       const input = document.createElement('input');
@@ -139,36 +143,52 @@
       Array.from(row.children).forEach(c => c.className = 'cell');
     }
 
+    // Wordle scoring for duplicates
+    function scoreAgainst(targetStr, guessArr){
+      const target = targetStr.toUpperCase().split('');
+      const states = Array(LEN).fill('red');
+      const counts = new Map();
+      for(const ch of target){ counts.set(ch, (counts.get(ch)||0)+1); }
+      // Greens first
+      for(let i=0;i<LEN;i++){
+        if(guessArr[i] === target[i]){
+          states[i] = 'green';
+          counts.set(guessArr[i], counts.get(guessArr[i]) - 1);
+        }
+      }
+      // Yellows
+      for(let i=0;i<LEN;i++){
+        if(states[i] === 'green') continue;
+        const ch = guessArr[i];
+        if(counts.get(ch) > 0){
+          states[i] = 'yellow';
+          counts.set(ch, counts.get(ch) - 1);
+        }
+      }
+      return states;
+    }
+
     function evaluate(){
       clearStates();
       const guess = inputs.map(i => i.value.toUpperCase());
-      const target = ANSWER.toUpperCase().split('');
-      const counts = new Map();
-      for(const ch of target){ counts.set(ch, (counts.get(ch)||0)+1); }
+
+      // Score vs both answers
+      const s1 = scoreAgainst(ANSWER1, guess);
+      const s2 = scoreAgainst(ANSWER2, guess);
+
+      // Union combine: green > yellow > red
+      const combined = s1.map((_, i) => {
+        if (s1[i] === 'green' || s2[i] === 'green') return 'green';
+        if (s1[i] === 'yellow' || s2[i] === 'yellow') return 'yellow';
+        return 'red';
+      });
 
       const cells = Array.from(row.children);
-      const states = Array(LEN).fill('');
-
-      // Greens
       for(let i=0;i<LEN;i++){
-        if(guess[i]===target[i]){
-          states[i]='green';
-          counts.set(guess[i], counts.get(guess[i])-1);
-        }
+        cells[i].classList.add(`state-${combined[i]}`);
+        cells[i].style.transform = 'scale(1.04)';
+        setTimeout(() => cells[i].style.transform = 'scale(1)', 90);
       }
-      // Yellows / Reds
-      for(let i=0;i<LEN;i++){
-        if(states[i]) continue;
-        const ch = guess[i];
-        if(counts.get(ch)>0){
-          states[i]='yellow';
-          counts.set(ch, counts.get(ch)-1);
-        } else {
-          states[i]='red';
-        }
-      }
-
-      for(let i=0;i<LEN;i++) cells[i].classList.add(`state-${states[i]}`);
     }
   </script>
 </body>
