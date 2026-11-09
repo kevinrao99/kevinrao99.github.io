@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tree of Life — YAML</title>
+  <style>
+    body {
+      margin: 0 auto;
+      padding: 1.5rem;
+      max-width: 90rem;
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+    }
+    h2 {
+      margin-top: 2rem;
+      font-size: 1rem;
+      overflow-wrap: anywhere;
+    }
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      background: #f6f8fa;
+      font-size: 0.875rem;
+    }
+    code { font-family: ui-monospace, monospace; }
+    .status { color: #555; }
+  </style>
+</head>
+<body>
+  <nav><a href="index.html">Home</a> · <a href="tree_of_life.html">Tree of Life PDFs</a></nav>
+  <main>
+    <h1>Tree of Life — YAML</h1>
+    <p>The YAML files, displayed as plain text in their folder order.</p>
+    <noscript><p>Enable JavaScript to load the YAML files.</p></noscript>
+    <div id="files"></div>
+  </main>
+  <script>
+    const files = [
+      'main.yaml',
+      'Trees/Roots.yaml',
+      'Trees/Roots-term/Animalia.yaml',
+      'Trees/Roots-term/Animalia-term/Protostomia.yaml',
+      'Trees/Roots-term/Animalia-term/Deuterostomia.yaml',
+      'Trees/Roots-term/Animalia-term/Deutero-term/Teleostei.yaml',
+      'Trees/Roots-term/Animalia-term/Deutero-term/Synapsids.yaml',
+      'Trees/Roots-term/Animalia-term/Deutero-term/Synapsids-term/Carnivora.yaml',
+      'Trees/Roots-term/Animalia-term/Deutero-term/Synapsids-term/Cetartiodactyla.yaml',
+      'Trees/Roots-term/Animalia-term/Deutero-term/Sauropsids.yaml',
+      'Trees/Roots-term/Animalia-term/Deutero-term/Sauropsids-term/Dinosauria.yaml'
+    ];
+
+    const container = document.getElementById('files');
+    for (const file of files) {
+      const url = `tree_of_life/${file}`;
+      const section = document.createElement('section');
+      const heading = document.createElement('h2');
+      const link = document.createElement('a');
+      link.href = url;
+      link.textContent = url;
+      heading.append(link);
+
+      const status = document.createElement('p');
+      status.className = 'status';
+      status.textContent = 'Loading…';
+      const pre = document.createElement('pre');
+      const code = document.createElement('code');
+      pre.append(code);
+      section.append(heading, status, pre);
+      container.append(section);
+
+      fetch(url, { cache: 'no-store' })
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.text();
+        })
+        .then(text => {
+          code.textContent = text;
+          if (text.length === 0) {
+            status.textContent = 'Empty file.';
+          } else {
+            status.remove();
+          }
+        })
+        .catch(error => {
+          status.textContent = `Could not load this file: ${error.message}`;
+          pre.remove();
+        });
+    }
+  </script>
+</body>
+</html>
