@@ -1,0 +1,114 @@
+id: sauropsida
+name: Sauropsida
+notes: |-
+  Reptiles
+children:
+  - id: parareptilia
+    name: Parareptilia
+    extinct: true
+    notes: |-
+      Extinct family of reptiles that emerged in the Carboniferous period and includes Mesosaurs (not the same as Mosasaurs), the first reptiles to return to the water. Also includes first bipedal reptiles and first reptiles with advanced hearing. Only a few parareptiles survived into the Triassic period
+  - id: eureptilia
+    name: Eureptilia
+    notes: |-
+      “True” reptiles. The diapsids are the only ones who made it out of the Permian period (right before Triassic, ending in the Permian-Triassic extinction which is thought to be the biggest extinction event). We thus skip to Diapsids.
+    children:
+      - id: diapsids
+        name: Diapsids
+        notes: |-
+          Amniote tetrapods characterized with the development of two temporal fenestra (holes) on each side of the skull. The holes seem to be simply to reduce the weight of the skull.
+        children:
+          - id: sauropterygia
+            name: Sauropterygia
+            extinct: true
+            notes: |-
+              This clade of extinct aquatic reptiles is difficult to classify since we only have fossil evidence of them and there was likely lots of convergent evolution for aquatic traits in reptiles, but we know that they are diapsids and think that lepidosaurs and archosaurs are more closely related to each other than either are to Sauropterygia (though also maybe they're closer to archosaurs than lepidosaurs).
+
+              This clade includes Icthyopterygia, the aquatic reptiles with fins, and Plesiosauria, the ones with long necks and fins. It might also include Placodonts, or ancient sea turtle like reptiles which are probably not actually related to turtles.
+          - id: sauria
+            name: Sauria
+            notes: |-
+              Most recent common ancestors of Archosaurs (crocodiles, dinos, etc) and Lepidosaurs (lizards, etc)
+
+              Now we know that modern turtles belong here and not in parareptilia, which contained ancient turtles.
+            children:
+              - id: lepidosauromorpha
+                name: Lepidosauromorpha
+                notes: |-
+                  All reptiles closer related to lizards than archosaurs.
+
+                  Lepidosaurs have a three chambered heart (one ventricle) that allows oxygenated and deoxygenated blood to mix.
+
+                  Many lepidosaurs have a third eye on their head called a parietal eye which can detect light and dark which is useful for alerting of other animals casting a shadow.
+                children:
+                  - id: rhynchocephalia
+                    name: Rhynchocephalia
+                    notes: |-
+                      Only living species is the tuatara.
+                  - id: squamata
+                    name: Squamata
+                    notes: |-
+                      Roughly, lizards and snakes.
+
+                      “In squamates, the lungs are ventilated almost exclusively by the axial musculature. This is also the same musculature that is used during locomotion. Because of this constraint, most squamates are forced to hold their breath during intense runs.”
+              - id: archosauromorpha
+                name: Archosauromorpha
+                notes: |-
+                  Also called Archelosauria
+                children:
+                  - id: archosauriformes
+                    name: Archosauriformes
+                    notes: |-
+                      Roughly corresponds to the old definition of archosauria. Members have an antorbital fenestra in the skull.
+                    children:
+                      - id: archosauria
+                        name: Archosauria
+                        notes: |-
+                          Clade of which birds and crocodiles are the only living representatives. <mark class="highlight-green">This group rapidly expanded and dominated terrestrial vertebrates after the Permian-Triassic extinction.</mark>
+
+                          Antorbital and mandibular fenestra and “theocodonts” - teeth set in sockets to keep them from getting ripped out (although this is not unique to archosaurs; in particular mammals have this too).
+
+                          One possible expanation for why archosaurs dominated so quickly after the permian-triassic extinction is they were quick to get upright limbs and avoid <mark>Carrier's constraint</mark>, where sideways limbs tends to hinder one lung at all times when moving (lizards have to walk a bit and stop to breathe). Another explanation is that archosaurs have much more water efficient urine. Another explanation is that archosaurs' respiratory systems were more efficient and equipped to deal with a drop in oxygen levels.
+                        children:
+                          - id: pseudosuchia
+                            name: Pseudosuchia
+                            notes: |-
+                              Crocs and extinct relatives
+
+                              For respiration, crocodillians have a diaphragm analogous to the mammalian diaphragm.
+                          - id: avemetatarsalia
+                            name: Avemetatarsalia
+                            notes: |-
+                              aka Ornithodira
+
+                              Known for the “advanced mesotarsal” ankle, which allows for much greater mobility while walking. Also known for feather-like fibrous structures in the skin. Complete lack of Osteoderms, unlike in crocodiles.
+                            children:
+                              - id: pterosauromorpha
+                                name: Pterosauromorpha
+                                extinct: true
+                                notes: |-
+                                  Pterosaurs
+
+                                  Evolved flight independently of birds
+                              - ref: dinosauria
+                                name: Dinosauria
+                                notes: |-
+                                  All dinosaurs and modern-day birds
+
+                                  <mark class="highlight-green">Became the dominant vertebrates after the Triassic-Jurassic extinction event.</mark> They were probably active and had a warm blooded metabolism. The <mark>synapomorphies</mark> of dinosaurs:
+
+                                  Radius shorter than 80% of the humerus
+
+                                  (Many more on the wikipedia page)
+
+                                  Eoraptor, <mark class="highlight-green">a small bipedal predator dinosaur from mid Triassic 231 mya</mark>, is believed to be close to the common ancestor of all dinosaurs.
+
+                                  Dinosaurs started out fairly homogeneous but <mark class="highlight-green">began to get strongly differentiated wrt landmass shifts as Pangaea broke up in the early Cretaceous.</mark>
+                  - id: testudines
+                    name: Testudines
+                    notes: |-
+                      Turtles
+
+                      It's not actually clear how turtles breathe; the issue is that the hard shell prevents any sort of chest expansion and contraction.
+
+                      Also it's still disputed exactly where turtles go on the phylogeny; in particular if they are sauria.

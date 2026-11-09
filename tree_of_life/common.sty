@@ -1,0 +1,18 @@
+
+\usepackage[paperwidth=21cm,paperheight=60cm,margin=1in]{geometry}
+
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{color, soul}
+\usepackage{comment}
+
+\newcommand{\hlgreen}[1]{\sethlcolor{green} \hl{#1} \sethlcolor{yellow}}
+
+
+\setlistdepth{20}
+%\renewlist{itemize}{itemize}{20}
+\newlist{treelevel}{itemize}{20}
+
+% initially, use dots for all levels
+%\setlist[itemize]{label=--, labelindent = 1pt}
+\setlist[treelevel]{label=--, left = 1pt}

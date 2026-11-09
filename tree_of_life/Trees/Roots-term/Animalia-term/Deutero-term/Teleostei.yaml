@@ -1,0 +1,54 @@
+id: teleostei
+name: Teleostei
+notes: |-
+  Largest group of ray-finned fishes
+children:
+  - id: eloposteoglossocephala
+    name: Eloposteoglossocephala
+    notes: |-
+      Contains Osteoglossomorpha and Elopomorpha
+
+      The former includes the bony tongue fish that we often see in chinese restaurant fish tanks
+  - id: clupeocephala
+    name: Clupeocephala
+    children:
+      - id: otocephala
+        name: Otocephala
+        notes: |-
+          incl. herring, pirhanas, betas, catfish, electric eels
+
+          Named for having a hearing link? from swim bladder to inner ear.
+      - id: euteleostei
+        name: Euteleostei
+        children:
+          - id: teleostei-unnamed-1
+            notes: |-
+              Several branches off: Lepidogalaxii (salamanderfish), Procanthopterygii (salmon, trout, pike), Stomiati (smelt), Ateleopodia (jellynoses), Aulopa (lizardfish), Scopelomorpha (lanternfish)
+          - id: acanthomorpha
+            name: Acanthomorpha
+            notes: |-
+              Teleost fishes with spiny ray fins, contains 1/3 of fish species. Hollow unsegmented spines anterior of the dorsal and anal fins. Also rostal cartilage that lets the fish extend its jaws particularly far
+            children:
+              - id: teleostei-unnamed-2
+                children:
+                  - id: lampripterygii
+                    name: Lampripterygii
+                  - id: paracanthopterygii
+                    name: Paracanthopterygii
+              - id: teleostei-unnamed-3
+                children:
+                  - id: polymixiipterygii
+                    name: Polymixiipterygii
+                  - id: acanthopterygii
+                    name: Acanthopterygii
+                    children:
+                      - id: berycimorphaceae
+                        name: Berycimorphaceae
+                      - id: teleostei-unnamed-4
+                        children:
+                          - id: holocentrimorphaceae
+                            name: Holocentrimorphaceae
+                          - id: teleostei-unnamed-5
+                            children:
+                              - id: percomorpha
+                                name: Percomorpha

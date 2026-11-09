@@ -1,0 +1,117 @@
+id: synapsida
+name: Synapsida
+notes: |-
+  From here to Mammals there are a ton of extinct stem synapsids that are probably never going to be included in this Tree of Life. Thus, the relative position of these branches is correct, but a casual viewer may be falsely led to believe that the layers of the tree are consecutive as listed here.
+children:
+  - id: sphenacodontidae
+    name: Sphenacodontidae
+    rank: family
+    extinct: true
+    notes: |-
+      Non-mammalian synapsids that includes Dimetrodon.
+  - id: therapsida
+    name: Therapsida
+    notes: |-
+      The origin of many mammalian traits, such as legs positioned underneath the body and traits consistent with being endotherms (like vascular bones)
+    children:
+      - id: cynodonts
+        name: Cynodonts
+        notes: |-
+          Developed second palate in mouth, allowing chewing and breathing at the same time. Evolved the single bone mandible jaw, allowing the articular and angular bones to move and develop into parts of the mammalian ear.
+        children:
+          - id: mammalia
+            name: Mammalia
+            notes: |-
+              Needs little explanation
+            children:
+              - id: monotremata
+                name: Monotremata
+                notes: |-
+                  Traditionally named the Prototherians, the monotremes are the egg laying mammals who nevertheless nurse their offspring with milk from the mother. The only extant monotreme species are the platypus and four species of echidna.
+              - id: theria
+                name: Theria
+                notes: |-
+                  “Therian mammals give birth to live young without a shelled egg. This is possible thanks to key proteins called syncytins which allow exchanges between the mother and its offspring through a placenta, even rudimental ones such as in marsupials”
+                children:
+                  - id: marsupialia
+                    name: Marsupialia
+                    notes: |-
+                      Marsupials, distinct for carrying young in a pouch.
+                  - id: placentalia
+                    name: Placentalia
+                    notes: |-
+                      Mammals that carry the fetus in the uterus until fairly late in development. Though marsupials also use a placenta, the placental mammals use it for much longer.
+                    children:
+                      - id: atlantogenata
+                        name: Atlantogenata
+                        children:
+                          - id: afrotheria
+                            name: Afrotheria
+                            notes: |-
+                              Clade of animals of African origin, which don't necessarily look alike. Includes elephants, sea cows, and aardvarks.
+                          - id: xenarthra
+                            name: Xenarthra
+                            notes: |-
+                              Emerged in South America in the Paleocene era (59 mya) and includes sloths, anteaters, armadillos. Slowest metabolisms out of all therians.
+                      - id: boreoeutheria
+                        name: Boreoeutheria
+                        notes: |-
+                          Common ancestor was 100-90 mya (some say 65 mya). Most males have scrotums.
+                        children:
+                          - id: euarchontoglires
+                            name: Euarchontoglires
+                            notes: |-
+                              Rodents, lagomorphs (rabbits), tree shrews, colugos, primates!
+                          - id: laurasiatheria
+                            name: Laurasiatheria
+                            notes: |-
+                              Originated on Laurasia, discovered only due to similar gene sequences but not similar anatomy.
+                            children:
+                              - id: eulipotyphla
+                                name: Eulipotyphla
+                                notes: |-
+                                  Hedgehogs, moles
+                              - id: scrotifera
+                                name: Scrotifera
+                                notes: |-
+                                  Clade established based on genetics
+                                children:
+                                  - id: chiroptera
+                                    name: Chiroptera
+                                    notes: |-
+                                      Bats
+                                  - id: ferungulata
+                                    name: Ferungulata
+                                    notes: |-
+                                      Ferae and Ungulates
+                                    children:
+                                      - id: ferae
+                                        name: Ferae
+                                        children:
+                                          - id: pholidota
+                                            name: Pholidota
+                                            notes: |-
+                                              pangolins
+                                          - ref: carnivora
+                                            name: Carnivora
+                                            notes: |-
+                                              Carnivorans
+                                      - id: euungulata
+                                        name: Euungulata
+                                        notes: |-
+                                          Ungulates - Hooved animals
+                                        children:
+                                          - id: perissodactyla
+                                            name: Perissodactyla
+                                            notes: |-
+                                              Odd-toed ungulates
+
+                                              Equines, rhinos
+
+                                              hindgut fermenters (not ruminants) in that they have a cecum
+                                          - ref: cetartiodactyla
+                                            name: Cetartiodactyla
+                                            notes: |-
+                                              Even-toed ungulates
+
+                                              Ruminants and whales and pigs

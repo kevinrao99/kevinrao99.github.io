@@ -1,0 +1,58 @@
+id: cetartiodactyla
+name: Cetartiodactyla
+notes: |-
+  Even toed ungulates. Formerly called artiodatyla, name change due to cetaceans.
+
+  Lots of the branches here don't have descriptions because they're derived simply from molecular data/evidence.
+children:
+  - id: tylopoda
+    name: Tylopoda
+    notes: |-
+      Only surviving member of this class is camels
+  - id: artiofabula
+    name: Artiofabula
+    children:
+      - id: suina
+        name: Suina
+        notes: |-
+          Pigs - omnivorous, non ruminant (one stomach, which somehow activates omnivory). Uniquely have upper (maxillary) incisor teeth; other even toed ungulates have a hard dental pad.
+      - id: cetruminantia
+        name: Cetruminantia
+        children:
+          - id: ruminantia
+            name: Ruminantia
+            notes: |-
+              Large ruminant herbivores with multiple stomachs that ferment plant matter.
+            children:
+              - id: tragulidae
+                name: Tragulidae
+                notes: |-
+                  Only surviving members are mouse-deer
+              - id: pecora
+                name: Pecora
+                notes: |-
+                  Horn bearing ruminants, including giraffe, sheep, deer, bovines
+          - id: whippomorpha
+            name: Whippomorpha
+            notes: |-
+              Hippos, whales, and their extinct relatives
+            children:
+              - id: hippopotamidae
+                name: Hippopotamidae
+                notes: |-
+                  Hippos!
+              - id: cetacea
+                name: Cetacea
+                notes: |-
+                  There is a long line of extinct ancestors, including Basilosaurus, that branch off before the division of Cetaceans into the toothed and baleen whales
+                children:
+                  - id: mysticeti
+                    name: Mysticeti
+                    notes: |-
+                      Baleen Whales
+                  - id: odontoceti
+                    name: Odontoceti
+                    notes: |-
+                      Toothed whales, including sperm whales
+
+                      “Olfactory lobes of the brain and olfactory nerves are absent in all toothed whales, indicating that they have no sense of smell.”

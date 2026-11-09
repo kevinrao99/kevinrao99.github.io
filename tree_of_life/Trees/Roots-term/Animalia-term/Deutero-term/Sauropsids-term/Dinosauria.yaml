@@ -1,0 +1,199 @@
+id: dinosauria
+name: Dinosauria
+notes: |-
+  Dinosaurs and modern-day birds.
+children:
+  - id: ornithischia
+    name: Ornithischia
+    extinct: true
+    notes: |-
+      Bird hipped dinosaurs, based on the structure of the pelvis and hips; in particular, the pubis points backward along the ischium. Ironically, this group does not contain modern day birds.
+    children:
+      - id: heterodontosauridae
+        name: Heterodontosauridae
+        extinct: true
+      - id: thyreophora
+        name: Thyreophora
+        extinct: true
+        notes: |-
+          Armored dinosaurs, mostly quadrupeds
+        children:
+          - id: ankylosauria
+            name: Ankylosauria
+            extinct: true
+          - id: stegosauria
+            name: Stegosauria
+            extinct: true
+      - id: neornithischia
+        name: Neornithischia
+        extinct: true
+        children:
+          - id: ornithopoda
+            name: Ornithopoda
+            extinct: true
+            notes: |-
+              Evolved chewing with skull flexibility and many teeth. They had a mandibular fenestra.
+            children:
+              - id: hadrosauridae
+                name: Hadrosauridae
+                extinct: true
+                notes: |-
+                  Duck billed dinosaurs, large quadruped herbivores whose teeth merged together into “dental batteries”. They usually walked on four legs but were able to walk on two. From fossilized impressions of their skin, we have determined that hadrosaurs were scaly instead of feathered like some other dinosaurs.
+
+                  Based on the pattern of scratches on hadrosaur teeth it was once believed that they were grazers instead of browsers, but fossilized stomach contents seem to contradict this and we're still not sure.
+
+                  Hadrosaur remains, especially juvenile remains, have been discovered in formations that suggest pack raising of the young. The young also probably walked on two legs more than adults did.
+
+                  Hadrosaurs were first recognized from the very first fossils ever to be discovered in North America in 1854.
+                children:
+                  - id: lambeosaurinae
+                    name: Lambeosaurinae
+                    extinct: true
+                    notes: |-
+                      These were the ones with a hollow head crest. These crests could have been used to make sounds, but it's not clear. Parasaurolophus was in this category
+                  - id: saurolophinae
+                    name: Saurolophinae
+                    extinct: true
+                    notes: |-
+                      Solid head crests or absent head crests.
+              - id: iguanodon
+                name: Iguanodon
+                extinct: true
+                notes: |-
+                  Large herbivores with distinctive thumb spikes. “Together with Megalosaurus and Hylaeosaurus, it was one of the three genera originally used to define Dinosauria.” Originally believed to be quadrupedal with the thumb spike as a horn nose.
+          - id: marginocephalia
+            name: Marginocephalia
+            extinct: true
+            notes: |-
+              Characterized by cranial growth
+            children:
+              - id: pachycephalosauria
+                name: Pachycephalosauria
+                extinct: true
+                notes: |-
+                  Etymology - “thick skulled lizards”. Small (2-3 meters tall) bipeds with a domed or knobby skull. They also had remarkably good vision and smell.
+
+                  The main theory for the domed heads is that they headbutted like modern day rams or bison, and this is supported by “vertebral articulations” resulting in a rigid spine and strong neck muscles. However, evidence shows that the pachycephalosaurs didn't hold their spine in a straight shape and a domed head would make direct hits hard, so there are also theories that the ram was used just for defense or the pachycephalosaurs butted each others' flanks instead.
+
+                  More recent analysis shows that many of the domes have signs of experiencing osteomyelitis, an infection of the bone from penetrative trauma or injury to the flesh covering the bone. The incidence of this evidence is so regular that people believe this means the pachycephalosaurs used their dome heads in intra species combat.
+              - id: ceratopsia
+                name: Ceratopsia
+                extinct: true
+                notes: |-
+                  Herbivorous and beaked dinosaurs with a neck frill and often horns. In addition to defense, the frills may have been used for display or heat regulation.
+
+                  Rostral bone in the upper jaw is unique to Ceratopsids
+  - id: saurischia
+    name: Saurischia
+    notes: |-
+      Lizard hipped dinosaurs; the pubis points perpendicularly forward away from the ischium.
+    children:
+      - id: theropoda
+        name: Theropoda
+        notes: |-
+          All bipedal, mostly carnivorous dinosaurs.
+        children:
+          - id: ceratosauria
+            name: Ceratosauria
+            extinct: true
+            notes: |-
+              Shortened forelimbs and elaborately horned skulls.
+          - id: tetanurae
+            name: Tetanurae
+            notes: |-
+              Stiff tailed Theropods which <mark class="highlight-green">diverged from the Ceratorsaurs in the late Triassic.</mark> Shared features include air sac based lung systems that are similar to those of modern day birds and an advanced circulatory system. “Other tetanuran characterizing features include the absence of the fourth digit of the hand, placement of the maxillary teeth anterior to the orbit, a strap-like scapula, maxillary fenestrae, and stiffened tails.”
+            children:
+              - id: megaraptora
+                name: Megaraptora
+                extinct: true
+                notes: |-
+                  Hand snatchers. Group with a very controversial placement in the tree of life.
+              - id: carnosauria
+                name: Carnosauria
+                extinct: true
+                children:
+                  - id: spinosauridae
+                    name: Spinosauridae
+                    extinct: true
+                    notes: |-
+                      Large bipedal carnivores with crocodilian like skulls and a large back sail. Includes the species Baryonyx and Spinosaurus.
+
+                      Lots of evidence that they were semiaquatic. Their teeth were long, conical, and not serrated which is good for grabbing hold of slippery prey such as fish instead of cutting through flesh. The tips of their jaws fan out (“rosette”) and the nostrils are higher on the snout, suggesting they hunted with their snout semi submerged. Their snouts also have openings similar to those on the snouts of crocodiles to house pressure receptors, which greatly enhance their ability to detect movement in water.
+                  - id: allosauroidea
+                    name: Allosauroidea
+                    extinct: true
+              - id: coelurosauria
+                name: Coelurosauria
+                notes: |-
+                  Feathered Theropods
+                children:
+                  - id: tyrannosauroidea
+                    name: Tyrannosauroidea
+                    extinct: true
+                    notes: |-
+                      Tyrannosaurus and close relatives
+                  - id: ornithomimosauria
+                    name: Ornithomimosauria
+                    extinct: true
+                    notes: |-
+                      “Ostrich mimics”.
+                  - id: maniraptora
+                    name: Maniraptora
+                    children:
+                      - id: oviraptorosauria
+                        name: Oviraptorosauria
+                        extinct: true
+                      - id: paraves
+                        name: Paraves
+                        notes: |-
+                          Synonymous to Eumaniraptora up to classifications of some extinct branch species.
+                        children:
+                          - id: dinosauria-unnamed-1
+                            children:
+                              - id: dromaeosauridae
+                                name: Dromaeosauridae
+                                extinct: true
+                                notes: |-
+                                  The theropod family that includes the highly intelligent and probably feathered raptors such as the Velociraptor. They first appeared in the mid Jurassic and survived until the extinction of the dinosaurs. These are the closest relatives to modern day birds. This relationship has caused much debate over the definition of “bird.”
+
+                                  Relatively large skull, serrated teeth, narrow snout, forward facing eyes (probably binocular vision). Like other maniraptors, large hands with three clawed fingers. Biped and walking only on two toes, with their second toe raised and with a large claw that was probably used for hunting and climbing, sometimes both at the same time (climbing a large animal to attack it). They had a long tail that was probably flexible and used as a counterweight while running or in the air. Their jaws were not quite strong enough to finish off prey so they probably gripped or pinned other dinosaurs with their claws and started eating them until they bled out. They likely fed on larger dinosaurs and also ate bone. They had an acute sense of smell.
+
+                                  Dromeosaurs probably hunted or at least lived in packs, though the level of coordination is still up for debate.
+
+                                  Dromeosaurs were almost for sure covered in feathers. At least some of them were probably capable of gliding or clumsy flying.
+                                children:
+                                  - id: velociraptors
+                                    name: Velociraptors
+                                    extinct: true
+                                    notes: |-
+                                      Chicken sized Dromeosaurs
+                          - id: troodontidae
+                            name: Troodontidae
+                            extinct: true
+                          - id: avialae
+                            name: Avialae
+                            notes: |-
+                              Birds
+      - id: sauropodomorpha
+        name: Sauropodomorpha
+        extinct: true
+        notes: |-
+          Herbivore dinosaurs with long necks, small heads, long tails. These helped them browse the highest leaves in trees and be uncontested by smaller dinosaurs. They probably started out as omnivores and eventually adapted to herbivorism. In particular, the most ancestral sauropod and therefore the one most closely related to theropods still had carnivorous teeth.
+
+          Observations of scleral rings (bones around the eyes) and comparing them to those of modern day reptiles suggests they were cathemeral (active in irregular periods during a day, instead of sleeping once).
+
+          These were among the first dinosaurs to evolve at the end of the Triassic period.
+        children:
+          - id: sauropoda
+            name: Sauropoda
+            extinct: true
+            notes: |-
+              Huge sauropods. Despite many of them being gigantic, such gigantism was achieved independently multiple times in their evolutionary history. There are also a few examples of island dwarfism in sauropods.
+
+              Sauropod heads and necks were adapted in a few ways to allow their exaggerated features. Heads were “unable to orally process food” and were only to get food into the body, which allowed the head and neck to be even smaller, simpler, and lighter. Their necks had 19 vertebrae instead of the usual 7 in other vertebrates, and had lots of air sacs that helped them breathe in enough air for their massive bodies and high oxygen requirements. The air sacs also made their necks lighter. Their long necks also would have been helpful for dispersing body heat. Some believe that Sauropods could have only held their heads up for short periods of time, as pumping blood up such a massive column of flesh would be almost impossible and unsustainable.
+
+              Sauropods eventually completely lost their front toes and instead walk directly on their wrist bones. Some Sauropods, like brachiosaurs, probably could not stand on their hind legs, but others, like diplodocus, probably could quite easily. These findings are based on the position of the center of mass and the flexibility of the backbone.
+
+              These guys probably prefered coastal areas based on where they are found, and a 2021 study showed they cannot have lived in the arctic. Their numbers declined over time, possibly due to competition from Hadrosaurs but it's not clear.
+
+              Some sauropods formed herds with mixed ages, and others formed herds that segregated by age.

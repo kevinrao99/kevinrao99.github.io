@@ -1,0 +1,82 @@
+id: animalia
+name: Animalia
+rank: kingdom
+notes: |-
+  Consume oxygen, move, reproduce sexually, grow from a blastula.
+children:
+  - id: porifera
+    name: Porifera
+    rank: phylum
+    notes: |-
+      Sponges
+  - id: eumetazoa
+    name: Eumetazoa
+    rank: subkingdom
+    notes: |-
+      Organisms with true tissues that separate into germ layers. Unclear if even related to Porifera under the clade of Animalia
+    children:
+      - id: ctenophora
+        name: Ctenophora
+        rank: phylum
+        notes: |-
+          Microscopic organisms in marine ecosystems with jellylike bodies who move with cilia
+      - id: parahoxozoa
+        name: Parahoxozoa
+        rank: clade
+        notes: |-
+          Proposed clade sister to Ctenophora
+        children:
+          - id: non-bilaterans
+            name: Non-Bilaterans
+            children:
+              - id: cnidarians
+                name: Cnidarians
+                notes: |-
+                  Jellyfish, coral, sea anemone, characterized by cnidocytes which they use to catch prey. Bodies consist of jelly called mesoglea in between two (often 1 cell thick) epithelial layers.
+              - id: placozoa
+                name: Placozoa
+                notes: |-
+                  Super simple multicellular marine animal
+          - id: bilaterans-triploblasts
+            name: Bilaterans / Triploblasts
+            notes: |-
+              Triploblast - 3 germ layers: endoderm, mesoderm, ectoderm.
+              Notably, echinoderms (sea stars) have secondary bilateral symmetry and belong in this group.
+            children:
+              - id: nephrozoa
+                name: Nephrozoa
+                rank: clade
+                children:
+                  - ref: protostomia
+                    name: Protostomia
+                    rank: superphylum
+                    notes: |-
+                      First opening in the blastula becomes the mouth, and blastula is cleaved spirally (with some exceptions)
+                  - ref: deuterostomia
+                    name: Deuterostomia
+                    rank: superphylum
+                    notes: |-
+                      First opening in the blastula becomes the anus, and blastula is cleaved radially.
+              - id: proarticulata
+                name: Proarticulata
+                rank: phylum
+                extinct: true
+              - id: xenacoleomorpha
+                name: Xenacoleomorpha
+                rank: phylum
+                notes: |-
+                  Small phylum of bilateral nonprotostomes and nondeuterostomes.
+                children:
+                  - id: xenoturbellida
+                    name: Xenoturbellida
+                    notes: |-
+                      A few benthic marine worms with a single mouth leading to a gastric cavity with no anus.
+                  - id: acoleomorpha
+                    name: Acoleomorpha
+                    notes: |-
+                      Almost all marine, resemble simple flatworms - no body cavity or anus.
+                    children:
+                      - id: acolea
+                        name: Acolea
+                      - id: nemertodermatida
+                        name: Nemertodermatida
