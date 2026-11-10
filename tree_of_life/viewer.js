@@ -173,6 +173,8 @@
         icon.append(use);
         button.append(icon);
         const accessibleName = node.name || 'unnamed branch';
+        const displayLabel = label === 'children' ? 'subclades' : label;
+        const emptyLabel = label === 'children' ? 'Subclades not explored yet' : 'No notes';
         let populated = false;
 
         function setOpen(open) {
@@ -182,10 +184,10 @@
           }
           panel.hidden = !open;
           const verb = open ? 'Hide' : 'Show';
-          button.setAttribute('aria-label', `${verb} ${label} for ${accessibleName}`);
+          button.title = enabled ? `${verb} ${displayLabel}` : emptyLabel;
+          button.setAttribute('aria-label', `${button.title} for ${accessibleName}`);
           button.setAttribute('aria-expanded', String(open));
           button.setAttribute('aria-pressed', String(open));
-          button.title = enabled ? `${verb} ${label}` : `No ${label} recorded`;
         }
 
         setOpen(enabled && initiallyOpen);
