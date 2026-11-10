@@ -3,16 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tree of Life — YAML</title>
+  <title>Tree of Life 2</title>
+  <meta name="author" content="Kevin Rao">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="icon" type="image/png" href="images/tsuki_fish.png">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
   <style>
-    body {
-      margin: 0 auto;
-      padding: 1.5rem;
-      max-width: 90rem;
-      font-family: system-ui, sans-serif;
-      line-height: 1.5;
-    }
-    h2 {
+    main h2 { margin-top: 2rem; font-size: 1.25rem; }
+    main h3 {
       margin-top: 2rem;
       font-size: 1rem;
       overflow-wrap: anywhere;
@@ -26,68 +24,116 @@
     }
     code { font-family: ui-monospace, monospace; }
     .status { color: #555; }
+    .tree-frame {
+      padding: 1rem;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      background: #f6f8fa;
+    }
+    .tree-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .tree-node { min-width: 17rem; }
+    .node-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0;
+      font-family: ui-monospace, monospace;
+      font-size: 0.875rem;
+    }
+    .node-name { margin-right: 0.4rem; }
+    .node-name:empty { min-width: 1rem; }
+    .node-toggle {
+      padding: 0.3rem 0.55rem;
+      border: 1px solid #c8cdd2;
+      border-radius: 3px;
+      background: #fff;
+      color: #333;
+      font: inherit;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .node-toggle:hover:enabled { background: #e9edf1; }
+    .node-toggle[aria-expanded="true"] { background: #e9edf1; }
+    .node-toggle:disabled { color: #777; background: #f6f8fa; cursor: default; }
+    :focus-visible { outline: 2px solid #245c98; outline-offset: 3px; }
+    .tree-children {
+      margin-left: 0.4rem;
+      padding-left: 1.1rem;
+      border-left: 1px solid #aeb8c2;
+    }
+    .node-notes {
+      max-width: 70ch;
+      margin: 0.35rem 0 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      background: #fff;
+      font-size: 0.875rem;
+      overflow-wrap: anywhere;
+    }
+    .note-text { margin: 0; white-space: pre-wrap; }
+    .note-text + .note-text { margin-top: 1rem; }
+    mark { background: #fff0a8; }
+    mark.highlight-green { background: #d4edb5; }
+    .branch-status { margin: 0; padding: 0.5rem 0; font-size: 0.875rem; }
+    [hidden] { display: none !important; }
+    @media (max-width: 600px) {
+      .tree-frame { padding: 0.75rem; }
+      .node-toggle { min-height: 2.75rem; }
+      .tree-children { padding-left: 0.8rem; }
+    }
   </style>
 </head>
 <body>
-  <nav><a href="index.html">Home</a> · <a href="tree_of_life.html">Tree of Life PDFs</a></nav>
-  <main>
-    <h1>Tree of Life — YAML</h1>
-    <p>The YAML files, displayed as plain text in their folder order.</p>
-    <noscript><p>Enable JavaScript to load the YAML files.</p></noscript>
-    <div id="files"></div>
-  </main>
-  <script>
-    const files = [
-      'main.yaml',
-      'Trees/Roots.yaml',
-      'Trees/Roots-term/Animalia.yaml',
-      'Trees/Roots-term/Animalia-term/Protostomia.yaml',
-      'Trees/Roots-term/Animalia-term/Deuterostomia.yaml',
-      'Trees/Roots-term/Animalia-term/Deutero-term/Teleostei.yaml',
-      'Trees/Roots-term/Animalia-term/Deutero-term/Synapsids.yaml',
-      'Trees/Roots-term/Animalia-term/Deutero-term/Synapsids-term/Carnivora.yaml',
-      'Trees/Roots-term/Animalia-term/Deutero-term/Synapsids-term/Cetartiodactyla.yaml',
-      'Trees/Roots-term/Animalia-term/Deutero-term/Sauropsids.yaml',
-      'Trees/Roots-term/Animalia-term/Deutero-term/Sauropsids-term/Dinosauria.yaml'
-    ];
+  <div id="sidebar">
 
-    const container = document.getElementById('files');
-    for (const file of files) {
-      const url = `tree_of_life/${file}`;
-      const section = document.createElement('section');
-      const heading = document.createElement('h2');
-      const link = document.createElement('a');
-      link.href = url;
-      link.textContent = url;
-      heading.append(link);
+    <img style="width:100%;max-width:100%" alt="profile photo" src="images/ithink_circle.png" class="hoverZoomLink">
 
-      const status = document.createElement('p');
-      status.className = 'status';
-      status.textContent = 'Loading…';
-      const pre = document.createElement('pre');
-      const code = document.createElement('code');
-      pre.append(code);
-      section.append(heading, status, pre);
-      container.append(section);
+    <h2>Resources</h2>
+    <div class="navlist">
+      <ul>
+        <li><a href="index.html">About Me</a></li>
+        <li><a href="coursework.html">Coursework</a></li>
+        <li><a href="teaching.html">Notes and Teaching</a></li>
+        <li><a href="tree_of_life.html">Tree of Life</a></li>
+        <li><a href="tree_of_life_2.html">Tree of Life 2</a></li>
+      </ul>
+    </div>
+    <p>"I think" - Charles Darwin</p>
+  </div>
 
-      fetch(url, { cache: 'no-store' })
-        .then(response => {
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          return response.text();
-        })
-        .then(text => {
-          code.textContent = text;
-          if (text.length === 0) {
-            status.textContent = 'Empty file.';
-          } else {
-            status.remove();
-          }
-        })
-        .catch(error => {
-          status.textContent = `Could not load this file: ${error.message}`;
-          pre.remove();
-        });
-    }
-  </script>
+  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;table-layout:fixed;"><tbody>
+    <tr style="padding:0px">
+      <td style="padding:0px">
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;table-layout:fixed;"><tbody>
+          <tr>
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <main>
+                <h1>Tree of Life 2</h1>
+                <section aria-labelledby="viewer-heading">
+                  <h2 id="viewer-heading">Interactive tree</h2>
+                  <p>Open notes and children independently. Scroll sideways to follow deeper branches.</p>
+                  <div class="tree-frame" role="region" aria-label="Interactive tree" tabindex="0">
+                    <p id="tree-status" class="status" role="status">Loading tree…</p>
+                    <ul id="tree" class="tree-list"></ul>
+                  </div>
+                </section>
+                <h2>YAML files</h2>
+                <p>The source files, displayed as plain text in their folder order.</p>
+                <noscript><p>Enable JavaScript to load the tree and YAML files.</p></noscript>
+                <div id="files"></div>
+              </main>
+            </td>
+          </tr>
+        </tbody></table>
+      </td>
+    </tr>
+  </tbody></table>
+  <script src="tree_of_life/vendor/js-yaml-4.1.1.min.js" defer></script>
+  <script src="tree_of_life/viewer.js" defer></script>
 </body>
 </html>
