@@ -23,6 +23,13 @@
       font-size: 0.875rem;
     }
     code { font-family: ui-monospace, monospace; }
+    .yaml-files { margin-top: 2rem; }
+    .yaml-files > summary {
+      padding: 0.5rem 0;
+      font-size: 1.25rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
     .status { color: #555; }
     .tree-frame {
       padding: 1rem;
@@ -48,18 +55,43 @@
     .node-name { margin-right: 0.4rem; }
     .node-name:empty { min-width: 1rem; }
     .node-toggle {
-      padding: 0.3rem 0.55rem;
-      border: 1px solid #c8cdd2;
-      border-radius: 3px;
-      background: #fff;
-      color: #333;
-      font: inherit;
-      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.125rem;
+      height: 2.125rem;
+      padding: 0;
+      flex: 0 0 auto;
+      border: 1px solid #c1cad4;
+      border-radius: 5px;
+      background: linear-gradient(#fff, #edf0f3);
+      box-shadow: 0 2px 0 #bcc5ce, 0 3px 4px rgb(0 0 0 / 7%);
+      color: #77818d;
       cursor: pointer;
     }
-    .node-toggle:hover:enabled { background: #e9edf1; }
-    .node-toggle[aria-expanded="true"] { background: #e9edf1; }
-    .node-toggle:disabled { color: #777; background: #f6f8fa; cursor: default; }
+    .toggle-icon { width: 1.25rem; height: 1.25rem; }
+    .node-toggle:hover:enabled { border-color: #7895b5; }
+    .node-toggle[aria-pressed="true"] {
+      transform: translateY(2px);
+      border-color: #87afd5;
+      background: #e4effa;
+      box-shadow: inset 0 2px 3px rgb(38 83 125 / 22%);
+      color: #1772d0;
+    }
+    .node-toggle[aria-pressed="true"] .toggle-icon {
+      filter: drop-shadow(0 0 3px rgb(23 114 208 / 30%));
+    }
+    .node-toggle:active:enabled {
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 3px rgb(38 83 125 / 22%);
+    }
+    .node-toggle:disabled {
+      color: #adb4bc;
+      background: #f1f3f5;
+      box-shadow: none;
+      border-color: #dce1e6;
+      cursor: default;
+    }
     :focus-visible { outline: 2px solid #245c98; outline-offset: 3px; }
     .tree-children {
       margin-left: 0.4rem;
@@ -83,7 +115,7 @@
     [hidden] { display: none !important; }
     @media (max-width: 600px) {
       .tree-frame { padding: 0.75rem; }
-      .node-toggle { min-height: 2.75rem; }
+      .node-toggle { width: 2.75rem; height: 2.75rem; }
       .tree-children { padding-left: 0.8rem; }
     }
   </style>
@@ -116,16 +148,18 @@
                 <h1>Tree of Life 2</h1>
                 <section aria-labelledby="viewer-heading">
                   <h2 id="viewer-heading">Interactive tree</h2>
-                  <p>Open notes and children independently. Scroll sideways to follow deeper branches.</p>
+                  <p>Toggle notes and children with the icons. Scroll sideways to follow deeper branches.</p>
                   <div class="tree-frame" role="region" aria-label="Interactive tree" tabindex="0">
                     <p id="tree-status" class="status" role="status">Loading tree…</p>
                     <ul id="tree" class="tree-list"></ul>
                   </div>
                 </section>
-                <h2>YAML files</h2>
-                <p>The source files, displayed as plain text in their folder order.</p>
                 <noscript><p>Enable JavaScript to load the tree and YAML files.</p></noscript>
-                <div id="files"></div>
+                <details class="yaml-files">
+                  <summary>YAML files</summary>
+                  <p>The source files, displayed as plain text in their folder order.</p>
+                  <div id="files"></div>
+                </details>
               </main>
             </td>
           </tr>

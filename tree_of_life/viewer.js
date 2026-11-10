@@ -157,35 +157,45 @@
       children.id = `children-${key}`;
       notes.hidden = children.hidden = true;
 
-      function addToggle(label, panel, enabled, populate) {
+      function addToggle(label, panel, enabled, populate, initiallyOpen = false) {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'node-toggle';
-        button.textContent = `Show ${label}`;
         button.disabled = !enabled;
-        button.setAttribute('aria-expanded', 'false');
         button.setAttribute('aria-controls', panel.id);
+        const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        icon.classList.add('toggle-icon');
+        icon.setAttribute('viewBox', '0 0 24 24');
+        icon.setAttribute('aria-hidden', 'true');
+        icon.setAttribute('focusable', 'false');
+        const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+        use.setAttribute('href', `tree_of_life/icons/toggles.svg#${label}`);
+        icon.append(use);
+        button.append(icon);
         const accessibleName = node.name || 'unnamed branch';
-        button.setAttribute('aria-label', `Show ${label} for ${accessibleName}`);
-        if (!enabled) button.title = `No ${label} recorded`;
         let populated = false;
-        button.addEventListener('click', () => {
-          if (!populated) {
+
+        function setOpen(open) {
+          if (open && !populated) {
             populate();
             populated = true;
           }
-          panel.hidden = !panel.hidden;
-          const verb = panel.hidden ? 'Show' : 'Hide';
-          button.textContent = `${verb} ${label}`;
+          panel.hidden = !open;
+          const verb = open ? 'Hide' : 'Show';
           button.setAttribute('aria-label', `${verb} ${label} for ${accessibleName}`);
-          button.setAttribute('aria-expanded', String(!panel.hidden));
-        });
+          button.setAttribute('aria-expanded', String(open));
+          button.setAttribute('aria-pressed', String(open));
+          button.title = enabled ? `${verb} ${label}` : `No ${label} recorded`;
+        }
+
+        setOpen(enabled && initiallyOpen);
+        button.addEventListener('click', () => setOpen(panel.hidden));
         row.append(button);
       }
 
       addToggle('notes', notes, node.notes.length > 0, () => {
         for (const text of node.notes) appendNotes(notes, text);
-      });
+      }, true);
       addToggle('children', children, node.children.length > 0 || node.missing, () => {
         for (const child of node.children) children.append(renderNode(child));
         if (node.missing) {
