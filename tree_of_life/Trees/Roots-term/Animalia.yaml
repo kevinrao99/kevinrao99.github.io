@@ -1,35 +1,35 @@
 id: animalia
 name: Animalia
-short_description: ""
+short_description: "Consume oxygen, move, reproduce sexually, grow from a blastula."
 rank: kingdom
 notes: |-
-  Consume oxygen, move, reproduce sexually, grow from a blastula.
+
 children:
   - id: porifera
     name: Porifera
-    short_description: ""
+    short_description: "Sponges"
     rank: phylum
     notes: |-
-      Sponges
+    
   - id: eumetazoa
     name: Eumetazoa
-    short_description: ""
+    short_description: "Organisms with true tissues that separate into germ layers"
     rank: subkingdom
     notes: |-
-      Organisms with true tissues that separate into germ layers. Unclear if even related to Porifera under the clade of Animalia
+      Unclear if even related to Porifera under the clade of Animalia
     children:
       - id: ctenophora
         name: Ctenophora
-        short_description: ""
+        short_description: "Microscopic organisms in marine ecosystems with jellylike bodies who move with cilia"
         rank: phylum
         notes: |-
-          Microscopic organisms in marine ecosystems with jellylike bodies who move with cilia
+          
       - id: parahoxozoa
         name: Parahoxozoa
-        short_description: ""
+        short_description: "Proposed clade sister to Ctenophora"
         rank: clade
         notes: |-
-          Proposed clade sister to Ctenophora
+          
         children:
           - id: non-bilaterans
             name: Non-Bilaterans
@@ -37,19 +37,18 @@ children:
             children:
               - id: cnidarians
                 name: Cnidarians
-                short_description: ""
+                short_description: "Jellyfish, coral, sea anemone, characterized by cnidocytes which they use to catch prey"
                 notes: |-
-                  Jellyfish, coral, sea anemone, characterized by cnidocytes which they use to catch prey. Bodies consist of jelly called mesoglea in between two (often 1 cell thick) epithelial layers.
+                  Bodies consist of jelly called mesoglea in between two (often 1 cell thick) epithelial layers.
               - id: placozoa
                 name: Placozoa
-                short_description: ""
+                short_description: "Super simple multicellular marine animal"
                 notes: |-
-                  Super simple multicellular marine animal
+                  
           - id: bilaterans-triploblasts
             name: Bilaterans / Triploblasts
-            short_description: ""
+            short_description: "Triploblast - 3 germ layers: endoderm, mesoderm, ectoderm"
             notes: |-
-              Triploblast - 3 germ layers: endoderm, mesoderm, ectoderm.
               Notably, echinoderms (sea stars) have secondary bilateral symmetry and belong in this group.
             children:
               - id: nephrozoa
@@ -59,16 +58,16 @@ children:
                 children:
                   - ref: protostomia
                     name: Protostomia
-                    short_description: ""
+                    short_description: "First opening in the blastula becomes the mouth, and blastula is cleaved spirally (with some exceptions)"
                     rank: superphylum
                     notes: |-
-                      First opening in the blastula becomes the mouth, and blastula is cleaved spirally (with some exceptions)
+                      
                   - ref: deuterostomia
                     name: Deuterostomia
-                    short_description: ""
+                    short_description: "First opening in the blastula becomes the anus, and blastula is cleaved radially."
                     rank: superphylum
                     notes: |-
-                      First opening in the blastula becomes the anus, and blastula is cleaved radially.
+                      
               - id: proarticulata
                 name: Proarticulata
                 short_description: ""
@@ -76,21 +75,21 @@ children:
                 extinct: true
               - id: xenacoleomorpha
                 name: Xenacoleomorpha
-                short_description: ""
+                short_description: "Small phylum of bilateral nonprotostomes and nondeuterostomes"
                 rank: phylum
                 notes: |-
-                  Small phylum of bilateral nonprotostomes and nondeuterostomes.
+                  
                 children:
                   - id: xenoturbellida
                     name: Xenoturbellida
-                    short_description: ""
+                    short_description: "A few benthic marine worms with a single mouth leading to a gastric cavity with no anus"
                     notes: |-
-                      A few benthic marine worms with a single mouth leading to a gastric cavity with no anus.
+                      
                   - id: acoleomorpha
                     name: Acoleomorpha
-                    short_description: ""
+                    short_description: "Almost all marine, resemble simple flatworms"
                     notes: |-
-                      Almost all marine, resemble simple flatworms - no body cavity or anus.
+                      no body cavity or anus.
                     children:
                       - id: acolea
                         name: Acolea
