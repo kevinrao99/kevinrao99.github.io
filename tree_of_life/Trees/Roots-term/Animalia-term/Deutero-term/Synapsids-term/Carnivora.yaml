@@ -1,56 +1,73 @@
 id: carnivora
 name: Carnivora
+short_description: ""
 children:
   - id: feliformia
     name: Feliformia
+    short_description: ""
   - id: carniformia
     name: Carniformia
+    short_description: ""
     children:
       - id: canoidea
         name: Canoidea
+        short_description: ""
         children:
           - id: cynoidea
             name: Cynoidea
+            short_description: ""
             children:
               - id: canidae
                 name: Canidae
+                short_description: ""
                 notes: |-
                   Dogs
           - id: arctoidea
             name: Arctoidea
+            short_description: ""
             children:
               - id: ursoidea
                 name: Ursoidea
+                short_description: ""
                 children:
                   - id: ursidae
                     name: Ursidae
+                    short_description: ""
                     notes: |-
                       Bears
                   - id: hemicyonidae
                     name: Hemicyonidae
+                    short_description: ""
                     extinct: true
               - id: mustelidae
                 name: Mustelidae
+                short_description: ""
                 children:
                   - id: pinnipedia
                     name: Pinnipedia
+                    short_description: ""
                     children:
                       - id: phocidae
                         name: Phocidae
+                        short_description: ""
                         notes: |-
                           Earless seals
                       - id: otarioidea
                         name: Otarioidea
+                        short_description: ""
                         children:
                           - id: odobenidae
                             name: Odobenidae
+                            short_description: ""
                             notes: |-
                               Walruses
                           - id: otariidae
                             name: Otariidae
+                            short_description: ""
                             notes: |-
                               Eared seals
 
                               stronger pecs compared to Phocids (earless “true” seals), ability to turn hind fins forward to walk on them. Includes sea lions roughly on the branches off the line and fur seals as a monophyletic subfamily. More semiaquatic.
                   - id: musteloidea
                     name: Musteloidea
+                    short_description: ""

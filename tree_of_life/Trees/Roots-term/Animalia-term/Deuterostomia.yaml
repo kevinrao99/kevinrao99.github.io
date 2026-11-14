@@ -1,17 +1,20 @@
 id: deuterostomia
 name: Deuterostomia
+short_description: ""
 rank: superphylum
 notes: |-
   First opening in the blastula becomes the anus, and blastula is cleaved radially.
 children:
   - id: ambulacraria
     name: Ambulacraria
+    short_description: ""
     rank: phylum
     notes: |-
       Standard deuterostome (radially cleaved triploblast) blastula develops into a dipleura larval form
     children:
       - id: echinoderms
         name: Echinoderms
+        short_description: ""
         rank: phylum
         notes: |-
           Evolved from organisms with bilateral symmetry, as the larva are generally bilateral, these are organisms with (usually) 5 point radial symmetry as adults. The “left side” of the body grows “pentaradially” and the right side shrinks which is how they end up with radial symmetry.
@@ -21,11 +24,13 @@ children:
           Sea stars, sea urchins, sea cucumbers, sea lilies
       - id: hemichordates
         name: Hemichordates
+        short_description: ""
         rank: phylum
         notes: |-
           Main member is the acorn worm.
   - id: chordata
     name: Chordata
+    short_description: ""
     rank: phylum
     notes: |-
       “During some period of their life cycle, chordates possess a notochord, a dorsal nerve cord, pharyngeal slits, and a post-anal tail: these four anatomical features define this phylum.”
@@ -34,17 +39,20 @@ children:
     children:
       - id: cephalochordata
         name: Cephalochordata
+        short_description: ""
         rank: subphylum
         notes: |-
           Lancelets
       - id: olfactores
         name: Olfactores
+        short_description: ""
         rank: clade
         notes: |-
           Pharynx develops to include sensory and respiratory functions
         children:
           - id: tunicates
             name: Tunicates
+            short_description: ""
             rank: subphylum
             notes: |-
               Formerly called Urochordates. Some are solitary, some replicate by budding and form colonies, most are sessile as adults, all are siphon/filter feeders.
@@ -52,6 +60,7 @@ children:
               <mark class="highlight-green">Earliest probable tunicate appeared at the beginning of the Cambrian</mark>
           - id: vertebrates
             name: Vertebrates
+            short_description: ""
             rank: subphylum
             notes: |-
               Possess a vertebral column - a stiffer structure with jointed segments (vertebra) that replaces the notochord. Unique to vertebrates are neural crest cells and neural cephalization.
@@ -62,6 +71,7 @@ children:
             children:
               - id: agnatha
                 name: Agnatha
+                short_description: ""
                 rank: superclass
                 notes: |-
                   Lampreys and Myxini (hagfish). Ectothermic. The digestive track is long and relatively homogeneous; no distinctive gut.
@@ -71,6 +81,7 @@ children:
                   Many extinct species
               - id: gnathostomata
                 name: Gnathostomata
+                short_description: ""
                 rank: superclass
                 notes: |-
                   Jawed vertebrates - living representatives have a semicircular ear canal, myelin sheaths on neurons, and paired appendages.
@@ -81,6 +92,7 @@ children:
                 children:
                   - id: placodermi
                     name: Placodermi
+                    short_description: ""
                     rank: class
                     extinct: true
                     notes: |-
@@ -91,10 +103,12 @@ children:
                       <mark class="highlight-green">Earliest fossils found in China and are from the Silurian.</mark>
                   - id: eugnathostomata
                     name: Eugnathostomata
+                    short_description: ""
                     rank: superclass
                     children:
                       - id: acanthodians
                         name: Acanthodians
+                        short_description: ""
                         rank: class
                         extinct: true
                         notes: |-
@@ -102,6 +116,7 @@ children:
                         children:
                           - id: chondrichthyes
                             name: Chondrichthyes
+                            short_description: ""
                             rank: class
                             notes: |-
                               Cartilaginous fish
@@ -112,16 +127,19 @@ children:
                             children:
                               - ref: elasmobranchii
                                 name: Elasmobranchii
+                                short_description: ""
                                 notes: |-
                                   Sharks, rays, skates, sawfish. <mark class="highlight-green">Earliest elasmobranch fossils are from the Devonian.</mark>
 
                                   They don't have a swim bladder and instead use very oily livers to control buoyancy. Their eyes have tapetum lucidum.
                               - id: holocephali
                                 name: Holocephali
+                                short_description: ""
                                 notes: |-
                                   Includes the Australian ghostshark, <mark>which we believe to be the slowest evolving vertebrate.</mark> Unlike most cartilaginous fish, the notochord is not replaced by a vertebral column.
                       - id: osteichthyes
                         name: Osteichthyes
+                        short_description: ""
                         rank: class
                         notes: |-
                           Bony vertebrates.
@@ -130,19 +148,23 @@ children:
                         children:
                           - id: actinopterygii
                             name: Actinopterygii
+                            short_description: ""
                             rank: class
                             notes: |-
                               Ray-finned fish - fins are webs of skin supported by bony spines instead of fleshy limbs. Almost all species have separate sexes and external fertilization.
                             children:
                               - id: cladista
                                 name: Cladista
+                                short_description: ""
                                 notes: |-
                                   Only contains a few eel-like fishes out of many extinct representatives.
                               - id: actinopteri
                                 name: Actinopteri
+                                short_description: ""
                                 children:
                                   - id: chondrostei
                                     name: Chondrostei
+                                    short_description: ""
                                     notes: |-
                                       Primarily cartilaginous fish that also show some ossification. The cartilage-ness is believed to be derived instead of elementary; ancestors of these species developed bones just like other Osteichthyes.
 
@@ -150,23 +172,28 @@ children:
                                     children:
                                       - id: acipenseridae
                                         name: Acipenseridae
+                                        short_description: ""
                                         notes: |-
                                           Sturgeon, 27 species. Have 5 rows of scutes instead of scales. Sturgeons are anadromous (live in the sea, migrate to freshwater to mate). Toothless benthic suction feeders. Sturgeon are sometimes seen leaping completely out of the water and splashing down which can be heard a mile away and it's unclear why they do this.
                                       - id: polyodontidae
                                         name: Polyodontidae
+                                        short_description: ""
                                         notes: |-
                                           Paddlefish
                                   - id: neopterygii
                                     name: Neopterygii
+                                    short_description: ""
                                     children:
                                       - id: holostei
                                         name: Holostei
+                                        short_description: ""
                                         notes: |-
                                           Gars and bowfins, both of which are freshwater.
 
                                           Bowfins have a heterocercal tail.
                                       - ref: teleostei
                                         name: Teleostei
+                                        short_description: ""
                                         notes: |-
                                           Advanced Actinopterygians which have 96% of all extant fish species. All have leptoid scales, which are thinner and more transparent than other kinds of scales and new scales are added in concentric layers. Another distinguishing feature is movable premaxilla, which allow them to extend their mouths forward to pull in prey. They also have a second set of pharyngeal jaws.
 
@@ -177,6 +204,7 @@ children:
                                           Teleosts have an egg, larval, juvenile, adult life cycle.
                           - id: sarcopterygii
                             name: Sarcopterygii
+                            short_description: ""
                             rank: class
                             notes: |-
                               Lobe-finned fish.
@@ -187,12 +215,14 @@ children:
                             children:
                               - id: onychondontida
                                 name: Onychondontida
+                                short_description: ""
                                 rank: order
                                 extinct: true
                                 notes: |-
                                   Early diverging coelocanths
                               - id: actinistia
                                 name: Actinistia
+                                short_description: ""
                                 rank: order
                                 notes: |-
                                   Coelacanth
@@ -200,14 +230,17 @@ children:
                                   Oldest known living lineage of Sarcopterygii, with the <mark class="highlight-green">oldest known fossils being 410 mya</mark>. Reach maturity at 55 years old, live to about 100 years old, gestate their young for 5 years. They retain an oil filled notochord instead of the standard vertebral column. They have a fatty vestigial lung which is homologous to other fish's swim bladder and one kidney which is two fused together.
                               - id: dipnomorpha
                                 name: Dipnomorpha
+                                short_description: ""
                                 rank: infraclass
                                 children:
                                   - id: porolepiformes
                                     name: Porolepiformes
+                                    short_description: ""
                                     rank: order
                                     extinct: true
                                   - id: dipnoi
                                     name: Dipnoi
+                                    short_description: ""
                                     rank: subclass
                                     notes: |-
                                       Lungfish
@@ -215,12 +248,14 @@ children:
                                       Have a complex and specialized lung system, and in most species the gills are too atrophied to function on their own.
                               - id: tetropodomorpha
                                 name: Tetropodomorpha
+                                short_description: ""
                                 rank: infraclass
                                 notes: |-
                                   Tetrapods and extinct closest relatives
                                 children:
                                   - id: tetrapods
                                     name: Tetrapods
+                                    short_description: ""
                                     rank: order
                                     notes: |-
                                       Classification gets messy and largely hypothesis based here; the important features are stem tetrapods, amphibians, and amniotes, so that is how we present them here.
@@ -237,16 +272,19 @@ children:
                                     children:
                                       - id: stem-tetrapods
                                         name: Stem Tetrapods
+                                        short_description: ""
                                         notes: |-
                                           “Branch” families of tetrapods with no significant evolutionary diversity or impact.
                                       - ref: lissamphibia
                                         name: Lissamphibia
+                                        short_description: ""
                                         notes: |-
                                           Amphibians
 
                                           Traditionally excludes the early Paleozoic tetrapods. Shared traits: two types of skin glands (mucous and granular), green rods for vision, ability to elevate eyes.
                                       - id: amniota
                                         name: Amniota
+                                        short_description: ""
                                         notes: |-
                                           Amniotes, including reptiles and mammals, which lay eggs on land or retain them in the mother. They develop straight into a limbed form with a thick epithelium as opposed to a larval tadpole stage that develops with metamorphosis. Embryonic development involves the membrains amnion, chorion, allantois. The replacement of the amphibian gelatinous membrane with the sturdy fibrous shell allowed an increase in egg size and rate of gas exchange, permitting the embryo to become larger and more metabolically active and thus more advanced before birth.
 
@@ -254,6 +292,7 @@ children:
                                         children:
                                           - ref: synapsida
                                             name: Synapsida
+                                            short_description: ""
                                             notes: |-
                                               Mammals and relatives, which have a temporal fenestra and differentiated teeth that sets them apart from sauropsids.
 
@@ -264,6 +303,7 @@ children:
                                               Early synapsids may have layed dry leathery eggs with needed to be incubated and kept moist with glands on the mother. These glands may have eventually evolved into mammary glands.
                                           - ref: sauropsida
                                             name: Sauropsida
+                                            short_description: ""
                                             notes: |-
                                               Everything else; lizards, snakes, crocodiles. This term is broadly equivalent to “reptiles.”
 

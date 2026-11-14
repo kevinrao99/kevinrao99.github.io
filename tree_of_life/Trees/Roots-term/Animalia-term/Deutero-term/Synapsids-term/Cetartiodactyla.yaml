@@ -1,5 +1,6 @@
 id: cetartiodactyla
 name: Cetartiodactyla
+short_description: ""
 notes: |-
   Even toed ungulates. Formerly called artiodatyla, name change due to cetaceans.
 
@@ -7,51 +8,63 @@ notes: |-
 children:
   - id: tylopoda
     name: Tylopoda
+    short_description: ""
     notes: |-
       Only surviving member of this class is camels
   - id: artiofabula
     name: Artiofabula
+    short_description: ""
     children:
       - id: suina
         name: Suina
+        short_description: ""
         notes: |-
           Pigs - omnivorous, non ruminant (one stomach, which somehow activates omnivory). Uniquely have upper (maxillary) incisor teeth; other even toed ungulates have a hard dental pad.
       - id: cetruminantia
         name: Cetruminantia
+        short_description: ""
         children:
           - id: ruminantia
             name: Ruminantia
+            short_description: ""
             notes: |-
               Large ruminant herbivores with multiple stomachs that ferment plant matter.
             children:
               - id: tragulidae
                 name: Tragulidae
+                short_description: ""
                 notes: |-
                   Only surviving members are mouse-deer
               - id: pecora
                 name: Pecora
+                short_description: ""
                 notes: |-
                   Horn bearing ruminants, including giraffe, sheep, deer, bovines
           - id: whippomorpha
             name: Whippomorpha
+            short_description: ""
             notes: |-
               Hippos, whales, and their extinct relatives
             children:
               - id: hippopotamidae
                 name: Hippopotamidae
+                short_description: ""
                 notes: |-
                   Hippos!
               - id: cetacea
                 name: Cetacea
+                short_description: ""
                 notes: |-
                   There is a long line of extinct ancestors, including Basilosaurus, that branch off before the division of Cetaceans into the toothed and baleen whales
                 children:
                   - id: mysticeti
                     name: Mysticeti
+                    short_description: ""
                     notes: |-
                       Baleen Whales
                   - id: odontoceti
                     name: Odontoceti
+                    short_description: ""
                     notes: |-
                       Toothed whales, including sperm whales
 

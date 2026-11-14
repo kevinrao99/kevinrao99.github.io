@@ -1,108 +1,132 @@
 id: synapsida
 name: Synapsida
+short_description: ""
 notes: |-
   From here to Mammals there are a ton of extinct stem synapsids that are probably never going to be included in this Tree of Life. Thus, the relative position of these branches is correct, but a casual viewer may be falsely led to believe that the layers of the tree are consecutive as listed here.
 children:
   - id: sphenacodontidae
     name: Sphenacodontidae
+    short_description: ""
     rank: family
     extinct: true
     notes: |-
       Non-mammalian synapsids that includes Dimetrodon.
   - id: therapsida
     name: Therapsida
+    short_description: ""
     notes: |-
       The origin of many mammalian traits, such as legs positioned underneath the body and traits consistent with being endotherms (like vascular bones)
     children:
       - id: cynodonts
         name: Cynodonts
+        short_description: ""
         notes: |-
           Developed second palate in mouth, allowing chewing and breathing at the same time. Evolved the single bone mandible jaw, allowing the articular and angular bones to move and develop into parts of the mammalian ear.
         children:
           - id: mammalia
             name: Mammalia
+            short_description: ""
             notes: |-
               Needs little explanation
             children:
               - id: monotremata
                 name: Monotremata
+                short_description: ""
                 notes: |-
                   Traditionally named the Prototherians, the monotremes are the egg laying mammals who nevertheless nurse their offspring with milk from the mother. The only extant monotreme species are the platypus and four species of echidna.
               - id: theria
                 name: Theria
+                short_description: ""
                 notes: |-
                   “Therian mammals give birth to live young without a shelled egg. This is possible thanks to key proteins called syncytins which allow exchanges between the mother and its offspring through a placenta, even rudimental ones such as in marsupials”
                 children:
                   - id: marsupialia
                     name: Marsupialia
+                    short_description: ""
                     notes: |-
                       Marsupials, distinct for carrying young in a pouch.
                   - id: placentalia
                     name: Placentalia
+                    short_description: ""
                     notes: |-
                       Mammals that carry the fetus in the uterus until fairly late in development. Though marsupials also use a placenta, the placental mammals use it for much longer.
                     children:
                       - id: atlantogenata
                         name: Atlantogenata
+                        short_description: ""
                         children:
                           - id: afrotheria
                             name: Afrotheria
+                            short_description: ""
                             notes: |-
                               Clade of animals of African origin, which don't necessarily look alike. Includes elephants, sea cows, and aardvarks.
                           - id: xenarthra
                             name: Xenarthra
+                            short_description: ""
                             notes: |-
                               Emerged in South America in the Paleocene era (59 mya) and includes sloths, anteaters, armadillos. Slowest metabolisms out of all therians.
                       - id: boreoeutheria
                         name: Boreoeutheria
+                        short_description: ""
                         notes: |-
                           Common ancestor was 100-90 mya (some say 65 mya). Most males have scrotums.
                         children:
                           - id: euarchontoglires
                             name: Euarchontoglires
+                            short_description: ""
                             notes: |-
                               Rodents, lagomorphs (rabbits), tree shrews, colugos, primates!
                           - id: laurasiatheria
                             name: Laurasiatheria
+                            short_description: ""
                             notes: |-
                               Originated on Laurasia, discovered only due to similar gene sequences but not similar anatomy.
                             children:
                               - id: eulipotyphla
                                 name: Eulipotyphla
+                                short_description: ""
                                 notes: |-
                                   Hedgehogs, moles
                               - id: scrotifera
                                 name: Scrotifera
+                                short_description: ""
                                 notes: |-
                                   Clade established based on genetics
                                 children:
                                   - id: chiroptera
                                     name: Chiroptera
+                                    short_description: ""
                                     notes: |-
                                       Bats
                                   - id: ferungulata
                                     name: Ferungulata
+                                    short_description: ""
                                     notes: |-
                                       Ferae and Ungulates
                                     children:
                                       - id: ferae
                                         name: Ferae
+                                        short_description: ""
                                         children:
                                           - id: pholidota
                                             name: Pholidota
+                                            short_description: ""
                                             notes: |-
                                               pangolins
                                           - ref: carnivora
                                             name: Carnivora
+                                            short_description: ""
                                             notes: |-
                                               Carnivorans
                                       - id: euungulata
                                         name: Euungulata
+                                        short_description: ""
                                         notes: |-
                                           Ungulates - Hooved animals
                                         children:
                                           - id: perissodactyla
                                             name: Perissodactyla
+                                            short_description: ""
                                             notes: |-
                                               Odd-toed ungulates
 
@@ -111,6 +135,7 @@ children:
                                               hindgut fermenters (not ruminants) in that they have a cecum
                                           - ref: cetartiodactyla
                                             name: Cetartiodactyla
+                                            short_description: ""
                                             notes: |-
                                               Even-toed ungulates
 

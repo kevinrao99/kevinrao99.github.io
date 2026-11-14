@@ -1,25 +1,30 @@
 id: sauropsida
 name: Sauropsida
+short_description: ""
 notes: |-
   Reptiles
 children:
   - id: parareptilia
     name: Parareptilia
+    short_description: ""
     extinct: true
     notes: |-
       Extinct family of reptiles that emerged in the Carboniferous period and includes Mesosaurs (not the same as Mosasaurs), the first reptiles to return to the water. Also includes first bipedal reptiles and first reptiles with advanced hearing. Only a few parareptiles survived into the Triassic period
   - id: eureptilia
     name: Eureptilia
+    short_description: ""
     notes: |-
       “True” reptiles. The diapsids are the only ones who made it out of the Permian period (right before Triassic, ending in the Permian-Triassic extinction which is thought to be the biggest extinction event). We thus skip to Diapsids.
     children:
       - id: diapsids
         name: Diapsids
+        short_description: ""
         notes: |-
           Amniote tetrapods characterized with the development of two temporal fenestra (holes) on each side of the skull. The holes seem to be simply to reduce the weight of the skull.
         children:
           - id: sauropterygia
             name: Sauropterygia
+            short_description: ""
             extinct: true
             notes: |-
               This clade of extinct aquatic reptiles is difficult to classify since we only have fossil evidence of them and there was likely lots of convergent evolution for aquatic traits in reptiles, but we know that they are diapsids and think that lepidosaurs and archosaurs are more closely related to each other than either are to Sauropterygia (though also maybe they're closer to archosaurs than lepidosaurs).
@@ -27,6 +32,7 @@ children:
               This clade includes Icthyopterygia, the aquatic reptiles with fins, and Plesiosauria, the ones with long necks and fins. It might also include Placodonts, or ancient sea turtle like reptiles which are probably not actually related to turtles.
           - id: sauria
             name: Sauria
+            short_description: ""
             notes: |-
               Most recent common ancestors of Archosaurs (crocodiles, dinos, etc) and Lepidosaurs (lizards, etc)
 
@@ -34,6 +40,7 @@ children:
             children:
               - id: lepidosauromorpha
                 name: Lepidosauromorpha
+                short_description: ""
                 notes: |-
                   All reptiles closer related to lizards than archosaurs.
 
@@ -43,26 +50,31 @@ children:
                 children:
                   - id: rhynchocephalia
                     name: Rhynchocephalia
+                    short_description: ""
                     notes: |-
                       Only living species is the tuatara.
                   - id: squamata
                     name: Squamata
+                    short_description: ""
                     notes: |-
                       Roughly, lizards and snakes.
 
                       “In squamates, the lungs are ventilated almost exclusively by the axial musculature. This is also the same musculature that is used during locomotion. Because of this constraint, most squamates are forced to hold their breath during intense runs.”
               - id: archosauromorpha
                 name: Archosauromorpha
+                short_description: ""
                 notes: |-
                   Also called Archelosauria
                 children:
                   - id: archosauriformes
                     name: Archosauriformes
+                    short_description: ""
                     notes: |-
                       Roughly corresponds to the old definition of archosauria. Members have an antorbital fenestra in the skull.
                     children:
                       - id: archosauria
                         name: Archosauria
+                        short_description: ""
                         notes: |-
                           Clade of which birds and crocodiles are the only living representatives. <mark class="highlight-green">This group rapidly expanded and dominated terrestrial vertebrates after the Permian-Triassic extinction.</mark>
 
@@ -72,12 +84,14 @@ children:
                         children:
                           - id: pseudosuchia
                             name: Pseudosuchia
+                            short_description: ""
                             notes: |-
                               Crocs and extinct relatives
 
                               For respiration, crocodillians have a diaphragm analogous to the mammalian diaphragm.
                           - id: avemetatarsalia
                             name: Avemetatarsalia
+                            short_description: ""
                             notes: |-
                               aka Ornithodira
 
@@ -85,6 +99,7 @@ children:
                             children:
                               - id: pterosauromorpha
                                 name: Pterosauromorpha
+                                short_description: ""
                                 extinct: true
                                 notes: |-
                                   Pterosaurs
@@ -92,6 +107,7 @@ children:
                                   Evolved flight independently of birds
                               - ref: dinosauria
                                 name: Dinosauria
+                                short_description: ""
                                 notes: |-
                                   All dinosaurs and modern-day birds
 
@@ -106,6 +122,7 @@ children:
                                   Dinosaurs started out fairly homogeneous but <mark class="highlight-green">began to get strongly differentiated wrt landmass shifts as Pangaea broke up in the early Cretaceous.</mark>
                   - id: testudines
                     name: Testudines
+                    short_description: ""
                     notes: |-
                       Turtles
 
