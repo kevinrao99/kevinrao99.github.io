@@ -82,7 +82,7 @@
         throw new Error(`${file}: every tree node must be a mapping.`);
       }
       if (ancestors.has(node)) throw new Error(`${file}: circular YAML branch.`);
-      for (const field of ['id', 'ref', 'name', 'notes']) {
+      for (const field of ['id', 'ref', 'name', 'short_description', 'notes']) {
         if (node[field] !== undefined && typeof node[field] !== 'string') {
           throw new Error(`${file}: ${field} must be text.`);
         }
@@ -129,6 +129,8 @@
       }
       return {
         name: parts.find(part => part.name !== undefined)?.name || '',
+        // Blank descriptions on refs inherit the first nonempty target description.
+        shortDescription: parts.find(part => part.short_description?.trim())?.short_description || '',
         // Repeated notes on a ref and its target are shown once; distinct notes remain.
         notes: [...new Set(parts.map(part => part.notes).filter(Boolean))],
         children: parts.flatMap(part => part.children || []),
@@ -197,7 +199,7 @@
 
       addToggle('notes', notes, node.notes.length > 0, () => {
         for (const text of node.notes) appendNotes(notes, text);
-      }, true);
+      });
       addToggle('children', children, node.children.length > 0 || node.missing, () => {
         for (const child of node.children) children.append(renderNode(child));
         if (node.missing) {
@@ -207,7 +209,14 @@
           children.append(status);
         }
       });
-      item.append(row, notes, children);
+      item.append(row);
+      if (node.shortDescription) {
+        const description = document.createElement('p');
+        description.className = 'node-description';
+        description.textContent = node.shortDescription;
+        item.append(description);
+      }
+      item.append(notes, children);
       return item;
     }
 
