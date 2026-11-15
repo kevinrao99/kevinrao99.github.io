@@ -1,7 +1,15 @@
 id: synapsida
 name: Synapsida
-short_description: ""
+short_description: "Mammals and relatives"
 notes: |-
+  Temporal fenestra and differentiated teeth that sets them apart from sauropsids.
+
+  Early synapsids were the largest terrestrial vertebrates in the Permian (250 mya) but they were greatly reduced by the P-T extinction.
+
+  The mandible is a single bone instead of multiple and over time a second palate separating the nasal cavity and mouth began to form.
+
+  Early synapsids may have layed dry leathery eggs with needed to be incubated and kept moist with glands on the mother. These glands may have eventually evolved into mammary glands.
+
   From here to Mammals there are a ton of extinct stem synapsids that are probably never going to be included in this Tree of Life. Thus, the relative position of these branches is correct, but a casual viewer may be falsely led to believe that the layers of the tree are consecutive as listed here.
 children:
   - id: sphenacodontidae
@@ -95,9 +103,7 @@ children:
                                 children:
                                   - id: chiroptera
                                     name: Chiroptera
-                                    short_description: ""
-                                    notes: |-
-                                      Bats
+                                    short_description: "Bats"
                                   - id: ferungulata
                                     name: Ferungulata
                                     short_description: ""
@@ -114,10 +120,6 @@ children:
                                             notes: |-
                                               pangolins
                                           - ref: carnivora
-                                            name: Carnivora
-                                            short_description: ""
-                                            notes: |-
-                                              Carnivorans
                                       - id: euungulata
                                         name: Euungulata
                                         short_description: ""
@@ -134,9 +136,3 @@ children:
 
                                               hindgut fermenters (not ruminants) in that they have a cecum
                                           - ref: cetartiodactyla
-                                            name: Cetartiodactyla
-                                            short_description: ""
-                                            notes: |-
-                                              Even-toed ungulates
-
-                                              Ruminants and whales and pigs

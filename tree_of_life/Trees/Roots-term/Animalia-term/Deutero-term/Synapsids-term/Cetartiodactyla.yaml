@@ -1,6 +1,6 @@
 id: cetartiodactyla
 name: Cetartiodactyla
-short_description: ""
+short_description: "Even-toed ungulates. Ruminants and whales and pigs"
 notes: |-
   Even toed ungulates. Formerly called artiodatyla, name change due to cetaceans.
 
@@ -8,33 +8,27 @@ notes: |-
 children:
   - id: tylopoda
     name: Tylopoda
-    short_description: ""
-    notes: |-
-      Only surviving member of this class is camels
+    short_description: "Only surviving member of this class is camels"
   - id: artiofabula
     name: Artiofabula
     short_description: ""
     children:
       - id: suina
         name: Suina
-        short_description: ""
+        short_description: "Pigs"
         notes: |-
-          Pigs - omnivorous, non ruminant (one stomach, which somehow activates omnivory). Uniquely have upper (maxillary) incisor teeth; other even toed ungulates have a hard dental pad.
+          omnivorous, non ruminant (one stomach, which somehow activates omnivory). Uniquely have upper (maxillary) incisor teeth; other even toed ungulates have a hard dental pad.
       - id: cetruminantia
         name: Cetruminantia
         short_description: ""
         children:
           - id: ruminantia
             name: Ruminantia
-            short_description: ""
-            notes: |-
-              Large ruminant herbivores with multiple stomachs that ferment plant matter.
+            short_description: "Large ruminant herbivores with multiple stomachs that ferment plant matter"
             children:
               - id: tragulidae
                 name: Tragulidae
-                short_description: ""
-                notes: |-
-                  Only surviving members are mouse-deer
+                short_description: "Only surviving members are mouse-deer"
               - id: pecora
                 name: Pecora
                 short_description: ""

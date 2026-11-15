@@ -1,8 +1,14 @@
 id: teleostei
 name: Teleostei
-short_description: ""
+short_description: "Largest group of ray-finned fishes"
 notes: |-
-  Largest group of ray-finned fishes
+  Advanced Actinopterygians which have 96% of all extant fish species. All have leptoid scales, which are thinner and more transparent than other kinds of scales and new scales are added in concentric layers. Another distinguishing feature is movable premaxilla, which allow them to extend their mouths forward to pull in prey. They also have a second set of pharyngeal jaws.
+
+  Almost all diurnal teleosts have colored vision at least as good as a humans and most have good smell, taste, lateral line system.
+
+  All teleosts are ectotherms, and cold water teleosts have more unsaturated membrane fatty acids that allow them to maintain membrane fluidity in their cells. These adapted fish also have higher mitochondrial and capillary density to produce more aerobic ATP and counteract the lower metabolism due to a lower body temperature. Some also have mechanisms to keep their brains and eyes warm to maintain good vision. Fast swimming ocean fish like tuna use countercurrent exchange to maintain body temperatures as high as 11 degrees above the environment.
+
+  Teleosts have an egg, larval, juvenile, adult life cycle.
 children:
   - id: eloposteoglossocephala
     name: Eloposteoglossocephala

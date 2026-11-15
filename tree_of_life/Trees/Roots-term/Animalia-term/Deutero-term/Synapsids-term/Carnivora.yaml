@@ -1,6 +1,6 @@
 id: carnivora
 name: Carnivora
-short_description: ""
+short_description: "Carnivorans"
 children:
   - id: feliformia
     name: Feliformia

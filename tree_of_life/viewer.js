@@ -129,6 +129,7 @@
       }
       return {
         name: parts.find(part => part.name !== undefined)?.name || '',
+        extinct: parts.some(part => part.extinct === true),
         // Blank descriptions on refs inherit the first nonempty target description.
         shortDescription: parts.find(part => part.short_description?.trim())?.short_description || '',
         // Repeated notes on a ref and its target are shown once; distinct notes remain.
@@ -149,6 +150,15 @@
       const name = document.createElement('span');
       name.className = 'node-name';
       name.textContent = node.name;
+      if (node.extinct) {
+        const marker = document.createElement('span');
+        marker.className = 'node-extinct';
+        marker.textContent = '†';
+        marker.title = 'Extinct';
+        marker.setAttribute('role', 'img');
+        marker.setAttribute('aria-label', 'Extinct');
+        name.append('\u00a0', marker);
+      }
       row.append(name);
       const notes = document.createElement('div');
       notes.className = 'node-notes';

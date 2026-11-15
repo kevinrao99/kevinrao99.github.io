@@ -1,8 +1,20 @@
 id: sauropsida
 name: Sauropsida
-short_description: ""
+short_description: "Reptiles"
 notes: |-
-  Reptiles
+  Everything else; lizards, snakes, crocodiles. This term is broadly equivalent to “reptiles.”
+
+  <mark class="highlight-green">Reptiles first appeared during the Carboniferous and the two main branches, archosaurs and lepidosaurs, diverged during the Permain.</mark>
+
+  Of surviving reptiles, the non-bird ones are cold blooded and are thus restricted by a slower metabolism. In some larger reptiles like the leatherback turtle, a low surface area to volume ratio and muscular heat allows them to maintain a slightly higher temperature than their surroundings without being truly warm blooded. This is called gigantothermy.
+
+  The low food requirement associated with cold bloodedness (a crocodile can go half a year without eating) allows reptiles to persist in areas where food expensive mammals cannot. Not clear though if cold bloodedness is a result of ecology.
+
+  Lepidosaurs have epidermal scales while turtles and crocodiles have dermal scales or scutes.
+
+  Digestion is usually slow but their digestive tracts are short because meat and insects are easier to digest than plants. All reptiles have a cloaca.
+
+  Reptiles have good vision and color vision that also allows them to see UV. Most reptiles have a nictitating membrane.
 children:
   - id: parareptilia
     name: Parareptilia
