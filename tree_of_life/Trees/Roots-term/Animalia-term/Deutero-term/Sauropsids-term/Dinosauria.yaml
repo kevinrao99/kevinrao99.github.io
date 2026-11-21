@@ -6,10 +6,10 @@ notes: |-
 children:
   - id: ornithischia
     name: Ornithischia
-    short_description: ""
+    short_description: "Bird hipped dinosaurs, based on the structure of the pelvis and hips"
     extinct: true
     notes: |-
-      Bird hipped dinosaurs, based on the structure of the pelvis and hips; in particular, the pubis points backward along the ischium. Ironically, this group does not contain modern day birds.
+      in particular, the pubis points backward along the ischium. Ironically, this group does not contain modern day birds.
     children:
       - id: heterodontosauridae
         name: Heterodontosauridae
@@ -17,18 +17,18 @@ children:
         extinct: true
       - id: thyreophora
         name: Thyreophora
-        short_description: ""
+        short_description: "clade of dinosaurs with body armor"
         extinct: true
         notes: |-
           Armored dinosaurs, mostly quadrupeds
         children:
           - id: ankylosauria
             name: Ankylosauria
-            short_description: ""
+            short_description: "Ankylosaurs"
             extinct: true
           - id: stegosauria
             name: Stegosauria
-            short_description: ""
+            short_description: "Stegasaurus"
             extinct: true
       - id: neornithischia
         name: Neornithischia

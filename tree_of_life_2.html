@@ -32,10 +32,63 @@
     }
     .status { color: #555; }
     .tree-frame {
-      padding: 1rem;
-      overflow-x: auto;
       border: 1px solid #ddd;
+      border-radius: 6px;
       background: #f6f8fa;
+      overflow: hidden;
+    }
+    .tree-tabs {
+      display: flex;
+      gap: 0.3rem;
+      padding: 0.5rem 0.5rem 0;
+      overflow-x: auto;
+      border-bottom: 1px solid #cbd3dc;
+      background: #e9edf1;
+    }
+    .tree-tab-item {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      border: 1px solid transparent;
+      border-bottom: 0;
+      border-radius: 5px 5px 0 0;
+      color: #555;
+    }
+    .tree-tab-item.is-active {
+      border-color: #cbd3dc;
+      background: #f6f8fa;
+      color: #245c98;
+      box-shadow: inset 0 3px #245c98;
+    }
+    .tree-tab, .tree-tab-close {
+      min-height: 2.5rem;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+    .tree-tab { padding: 0.5rem 0.6rem 0.5rem 0.8rem; white-space: nowrap; }
+    .tree-tab[aria-selected="true"] { font-weight: bold; }
+    .tree-tab-close { min-width: 2.25rem; padding: 0.25rem; font-size: 1.25rem; }
+    .tree-tab:hover, .tree-tab-close:hover { background: rgb(36 92 152 / 8%); }
+    .tree-tabs :focus-visible { outline-offset: -4px; }
+    .tree-panel {
+      min-height: 18rem;
+      max-height: 65vh;
+      padding: 1rem;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+    #tree-status, .tree-empty { margin: 0; padding: 1rem; }
+    .tree-reopen {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #c1cad4;
+      border-radius: 4px;
+      background: #fff;
+      color: #245c98;
+      font: inherit;
+      cursor: pointer;
     }
     .tree-list {
       margin: 0;
@@ -78,6 +131,15 @@
       cursor: pointer;
     }
     .toggle-icon { width: 1.25rem; height: 1.25rem; }
+    .node-file-open { position: relative; }
+    .file-open-arrow {
+      position: absolute;
+      top: -0.15rem;
+      right: 0.05rem;
+      color: #245c98;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
     .node-toggle:hover:enabled { border-color: #7895b5; }
     .node-toggle[aria-pressed="true"] {
       transform: translateY(2px);
@@ -122,7 +184,9 @@
     .branch-status { margin: 0; padding: 0.5rem 0; font-size: 0.875rem; }
     [hidden] { display: none !important; }
     @media (max-width: 600px) {
-      .tree-frame { padding: 0.75rem; }
+      .tree-panel { padding: 0.75rem; }
+      .tree-tab, .tree-tab-close { min-height: 2.75rem; }
+      .tree-tab-close { min-width: 2.75rem; }
       .node-toggle { width: 2.75rem; height: 2.75rem; }
       .tree-children { padding-left: 0.8rem; }
     }
@@ -149,10 +213,12 @@
                 <h1>Tree of Life 2</h1>
                 <section aria-labelledby="viewer-heading">
                   <h2 id="viewer-heading">Interactive tree</h2>
-                  <p>Toggle notes and children with the icons. Scroll sideways to follow deeper branches.</p>
-                  <div class="tree-frame" role="region" aria-label="Interactive tree" tabindex="0">
+                  <p>Toggle notes and subclades with the icons. Branches continued in another file open in their own tab.</p>
+                  <div class="tree-frame" role="region" aria-label="Interactive tree">
+                    <div id="tree-tabs" class="tree-tabs" role="tablist" aria-label="Open clades"></div>
                     <p id="tree-status" class="status" role="status">Loading tree…</p>
-                    <ul id="tree" class="tree-list"></ul>
+                    <div id="tree-panels"></div>
+                    <div id="tree-empty" class="tree-empty" hidden><p>No clades are open.</p></div>
                   </div>
                 </section>
                 <noscript><p>Enable JavaScript to load the tree and YAML files.</p></noscript>

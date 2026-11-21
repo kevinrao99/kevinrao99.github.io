@@ -76,6 +76,8 @@
     const references = new Set();
     const roots = [];
     const nodes = [];
+    const sourceFiles = new Map();
+    const fileRoots = new Map();
 
     function register(node, file, ancestors = new Set()) {
       if (!node || typeof node !== 'object' || Array.isArray(node)) {
@@ -96,6 +98,7 @@
       }
       if (node.ref) references.add(node.ref);
       nodes.push(node);
+      sourceFiles.set(node, file);
       const path = new Set(ancestors).add(node);
       for (const child of node.children || []) register(child, file, path);
     }
@@ -106,6 +109,7 @@
       if (root === undefined || root === null) continue;
       register(root, file);
       roots.push(root);
+      fileRoots.set(file, root);
     }
 
     // Check edges before rendering so a bad reference cannot recurse forever.
@@ -140,8 +144,11 @@
     }
 
     let serial = 0;
-    function renderNode(source) {
+    function renderNode(source, initiallyExpanded = false) {
       const node = resolve(source);
+      const target = index.get(source.ref);
+      const continuationFile = target && sourceFiles.get(target) !== sourceFiles.get(source)
+        ? sourceFiles.get(target) : null;
       const item = document.createElement('li');
       item.className = 'tree-node';
       if (!node.name) item.setAttribute('aria-label', 'Unnamed branch');
@@ -169,12 +176,10 @@
       children.id = `children-${key}`;
       notes.hidden = children.hidden = true;
 
-      function addToggle(label, panel, enabled, populate, initiallyOpen = false) {
+      function addIconButton(label) {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'node-toggle';
-        button.disabled = !enabled;
-        button.setAttribute('aria-controls', panel.id);
         const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         icon.classList.add('toggle-icon');
         icon.setAttribute('viewBox', '0 0 24 24');
@@ -184,6 +189,14 @@
         use.setAttribute('href', `tree_of_life/icons/toggles.svg#${label}`);
         icon.append(use);
         button.append(icon);
+        row.append(button);
+        return button;
+      }
+
+      function addToggle(label, panel, enabled, populate, initiallyOpen = false) {
+        const button = addIconButton(label);
+        button.disabled = !enabled;
+        button.setAttribute('aria-controls', panel.id);
         const accessibleName = node.name || 'unnamed branch';
         const displayLabel = label === 'children' ? 'subclades' : label;
         const emptyLabel = label === 'children' ? 'Subclades not explored yet' : 'No notes';
@@ -204,21 +217,34 @@
 
         setOpen(enabled && initiallyOpen);
         button.addEventListener('click', () => setOpen(panel.hidden));
-        row.append(button);
       }
 
       addToggle('notes', notes, node.notes.length > 0, () => {
         for (const text of node.notes) appendNotes(notes, text);
       });
-      addToggle('children', children, node.children.length > 0 || node.missing, () => {
-        for (const child of node.children) children.append(renderNode(child));
-        if (node.missing) {
-          const status = document.createElement('li');
-          status.className = 'status branch-status';
-          status.textContent = 'No continuation is available yet.';
-          children.append(status);
-        }
-      });
+      if (continuationFile) {
+        const button = addIconButton('children');
+        const label = rootName(continuationFile);
+        button.classList.add('node-file-open');
+        button.title = `Open ${label} tab`;
+        button.setAttribute('aria-label', button.title);
+        const arrow = document.createElement('span');
+        arrow.className = 'file-open-arrow';
+        arrow.textContent = '↗';
+        arrow.setAttribute('aria-hidden', 'true');
+        button.append(arrow);
+        button.addEventListener('click', () => openTab(continuationFile, true));
+      } else {
+        addToggle('children', children, node.children.length > 0 || node.missing, () => {
+          for (const child of node.children) children.append(renderNode(child));
+          if (node.missing) {
+            const status = document.createElement('li');
+            status.className = 'status branch-status';
+            status.textContent = 'No continuation is available yet.';
+            children.append(status);
+          }
+        }, initiallyExpanded);
+      }
       item.append(row);
       if (node.shortDescription) {
         const description = document.createElement('p');
@@ -232,7 +258,132 @@
 
     const forest = roots.filter(root => !references.has(root.id));
     if (!forest.length) throw new Error('No tree roots are available.');
-    document.getElementById('tree').replaceChildren(...forest.map(renderNode));
+    const tabList = document.getElementById('tree-tabs');
+    const panels = document.getElementById('tree-panels');
+    const empty = document.getElementById('tree-empty');
+    const tabs = new Map();
+    let activeTab = null;
+    let tabSerial = 0;
+
+    function rootName(file) {
+      const root = fileRoots.get(file);
+      return resolve(root).name || root.id || file.split('/').pop().replace(/\.yaml$/, '');
+    }
+
+    function activateTab(file, focus = true) {
+      if (activeTab) {
+        const previous = tabs.get(activeTab);
+        if (previous) {
+          previous.scrollTop = previous.panel.scrollTop;
+          previous.scrollLeft = previous.panel.scrollLeft;
+        }
+      }
+      activeTab = file;
+      for (const [key, tab] of tabs) {
+        const selected = key === file;
+        tab.button.setAttribute('aria-selected', String(selected));
+        tab.button.tabIndex = selected ? 0 : -1;
+        tab.item.classList.toggle('is-active', selected);
+        tab.panel.hidden = !selected;
+      }
+      empty.hidden = true;
+      const tab = tabs.get(file);
+      tab.panel.scrollTop = tab.scrollTop;
+      tab.panel.scrollLeft = tab.scrollLeft;
+      if (focus) {
+        tab.button.focus({ preventScroll: true });
+        tab.button.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+    }
+
+    function closeTab(file) {
+      const order = [...tabs.keys()];
+      const position = order.indexOf(file);
+      const tab = tabs.get(file);
+      tab.item.remove();
+      tab.panel.remove();
+      tabs.delete(file);
+      if (activeTab !== file) {
+        tabs.get(activeTab).button.focus({ preventScroll: true });
+        return;
+      }
+      activeTab = null;
+      if (tabs.size) {
+        activateTab(order[position + 1] || order[position - 1]);
+      } else {
+        empty.hidden = false;
+        empty.querySelector('button').focus({ preventScroll: true });
+      }
+    }
+
+    function openTab(file, expandRoot = false, focus = true) {
+      if (!tabs.has(file)) {
+        const label = rootName(file);
+        const key = ++tabSerial;
+        const item = document.createElement('div');
+        item.className = 'tree-tab-item';
+        item.setAttribute('role', 'presentation');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'tree-tab';
+        button.id = `tree-tab-${key}`;
+        button.textContent = label;
+        button.setAttribute('role', 'tab');
+        button.setAttribute('aria-controls', `tree-panel-${key}`);
+        button.addEventListener('click', () => activateTab(file));
+        button.addEventListener('keydown', event => {
+          const order = [...tabs.keys()];
+          const position = order.indexOf(file);
+          let next;
+          if (event.key === 'ArrowRight') next = order[(position + 1) % order.length];
+          if (event.key === 'ArrowLeft') next = order[(position + order.length - 1) % order.length];
+          if (event.key === 'Home') next = order[0];
+          if (event.key === 'End') next = order[order.length - 1];
+          if (next) {
+            event.preventDefault();
+            activateTab(next);
+          } else if (event.key === 'Delete') {
+            event.preventDefault();
+            closeTab(file);
+          }
+        });
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'tree-tab-close';
+        close.textContent = '×';
+        close.title = `Close ${label} tab`;
+        close.setAttribute('aria-label', close.title);
+        close.addEventListener('click', () => closeTab(file));
+        item.append(button, close);
+        const panel = document.createElement('div');
+        panel.className = 'tree-panel';
+        panel.id = `tree-panel-${key}`;
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', button.id);
+        panel.tabIndex = 0;
+        const tree = document.createElement('ul');
+        tree.className = 'tree-list';
+        tree.append(renderNode(fileRoots.get(file), expandRoot));
+        panel.append(tree);
+        // Keep each panel mounted so notes and expanded branches survive tab switches.
+        tabs.set(file, { item, button, panel, scrollTop: 0, scrollLeft: 0 });
+        tabList.append(item);
+        panels.append(panel);
+      }
+      activateTab(file, focus);
+    }
+
+    for (const root of forest) {
+      const file = sourceFiles.get(root);
+      const reopen = document.createElement('button');
+      reopen.type = 'button';
+      reopen.className = 'tree-reopen';
+      reopen.textContent = `Open ${rootName(file)}`;
+      reopen.addEventListener('click', () => openTab(file));
+      empty.append(reopen);
+      openTab(file, false, false);
+    }
+    activateTab(sourceFiles.get(forest[0]), false);
   }
 
   async function start() {
