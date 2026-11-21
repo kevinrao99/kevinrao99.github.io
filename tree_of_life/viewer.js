@@ -465,14 +465,16 @@
         target = index.get(target.ref);
       }
     }
-    const entries = [...searchEntries.values()].sort((a, b) => a.id.localeCompare(b.id));
+    const entries = [...searchEntries.values()]
+      .map(entry => ({ ...entry, fields: entry.fields.map(text => text.toLowerCase()) }))
+      .sort((a, b) => a.id.localeCompare(b.id));
     const input = document.getElementById('tree-search-input');
     const results = document.getElementById('tree-search-results');
     const count = document.getElementById('tree-search-count');
     const noMatches = document.getElementById('tree-search-empty');
 
     function updateSearch() {
-      const query = input.value;
+      const query = input.value.toLowerCase();
       const matches = entries.filter(entry => entry.fields.some(text => text.includes(query)));
       results.replaceChildren(...matches.map(entry => {
         const item = document.createElement('li');
