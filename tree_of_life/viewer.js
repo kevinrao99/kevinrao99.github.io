@@ -143,17 +143,25 @@
       };
     }
 
-    let serial = 0;
-    function renderNode(source, initiallyExpanded = false) {
-      const node = resolve(source);
+    function continuationFileFor(source) {
       const target = index.get(source.ref);
-      const continuationFile = target && sourceFiles.get(target) !== sourceFiles.get(source)
+      return target && sourceFiles.get(target) !== sourceFiles.get(source)
         ? sourceFiles.get(target) : null;
+    }
+
+    let serial = 0;
+    function renderNode(source, views, initiallyExpanded = false) {
+      const node = resolve(source);
+      const continuationFile = continuationFileFor(source);
       const item = document.createElement('li');
       item.className = 'tree-node';
+      if (source.id || source.ref) item.dataset.nodeId = source.id || source.ref;
       if (!node.name) item.setAttribute('aria-label', 'Unnamed branch');
       const row = document.createElement('div');
       row.className = 'node-row';
+      row.tabIndex = -1;
+      const view = { row, expandChildren: null };
+      views.set(source, view);
       const name = document.createElement('span');
       name.className = 'node-name';
       name.textContent = node.name;
@@ -217,6 +225,7 @@
 
         setOpen(enabled && initiallyOpen);
         button.addEventListener('click', () => setOpen(panel.hidden));
+        return () => setOpen(enabled);
       }
 
       addToggle('notes', notes, node.notes.length > 0, () => {
@@ -235,8 +244,8 @@
         button.append(arrow);
         button.addEventListener('click', () => openTab(continuationFile, true));
       } else {
-        addToggle('children', children, node.children.length > 0 || node.missing, () => {
-          for (const child of node.children) children.append(renderNode(child));
+        view.expandChildren = addToggle('children', children, node.children.length > 0 || node.missing, () => {
+          for (const child of node.children) children.append(renderNode(child, views));
           if (node.missing) {
             const status = document.createElement('li');
             status.className = 'status branch-status';
@@ -258,12 +267,43 @@
 
     const forest = roots.filter(root => !references.has(root.id));
     if (!forest.length) throw new Error('No tree roots are available.');
-    const tabList = document.getElementById('tree-tabs');
+    const tabList = document.getElementById('tree-file-tabs');
     const panels = document.getElementById('tree-panels');
-    const empty = document.getElementById('tree-empty');
+    const searchKey = Symbol('search');
+    const searchButton = document.getElementById('tree-search-tab');
+    const searchPanel = document.getElementById('tree-search-panel');
     const tabs = new Map();
+    tabs.set(searchKey, {
+      item: document.getElementById('tree-search-tab-item'),
+      button: searchButton, panel: searchPanel, scrollTop: 0, scrollLeft: 0
+    });
     let activeTab = null;
     let tabSerial = 0;
+
+    function tabOrder() {
+      return [...tabs.keys()].filter(key => key !== searchKey).concat(searchKey);
+    }
+
+    function onTabKeydown(event, key) {
+      const order = tabOrder();
+      const position = order.indexOf(key);
+      let next;
+      if (event.key === 'ArrowRight') next = order[(position + 1) % order.length];
+      if (event.key === 'ArrowLeft') next = order[(position + order.length - 1) % order.length];
+      if (event.key === 'Home') next = order[0];
+      if (event.key === 'End') next = searchKey;
+      if (next !== undefined) {
+        event.preventDefault();
+        activateTab(next);
+      } else if (event.key === 'Delete' && key !== searchKey) {
+        event.preventDefault();
+        closeTab(key);
+      }
+    }
+
+    searchButton.disabled = false;
+    searchButton.addEventListener('click', () => activateTab(searchKey));
+    searchButton.addEventListener('keydown', event => onTabKeydown(event, searchKey));
 
     function rootName(file) {
       const root = fileRoots.get(file);
@@ -286,7 +326,6 @@
         tab.item.classList.toggle('is-active', selected);
         tab.panel.hidden = !selected;
       }
-      empty.hidden = true;
       const tab = tabs.get(file);
       tab.panel.scrollTop = tab.scrollTop;
       tab.panel.scrollLeft = tab.scrollLeft;
@@ -297,7 +336,8 @@
     }
 
     function closeTab(file) {
-      const order = [...tabs.keys()];
+      if (file === searchKey) return;
+      const order = tabOrder();
       const position = order.indexOf(file);
       const tab = tabs.get(file);
       tab.item.remove();
@@ -308,12 +348,7 @@
         return;
       }
       activeTab = null;
-      if (tabs.size) {
-        activateTab(order[position + 1] || order[position - 1]);
-      } else {
-        empty.hidden = false;
-        empty.querySelector('button').focus({ preventScroll: true });
-      }
+      activateTab(order[position + 1] || order[position - 1]);
     }
 
     function openTab(file, expandRoot = false, focus = true) {
@@ -331,22 +366,7 @@
         button.setAttribute('role', 'tab');
         button.setAttribute('aria-controls', `tree-panel-${key}`);
         button.addEventListener('click', () => activateTab(file));
-        button.addEventListener('keydown', event => {
-          const order = [...tabs.keys()];
-          const position = order.indexOf(file);
-          let next;
-          if (event.key === 'ArrowRight') next = order[(position + 1) % order.length];
-          if (event.key === 'ArrowLeft') next = order[(position + order.length - 1) % order.length];
-          if (event.key === 'Home') next = order[0];
-          if (event.key === 'End') next = order[order.length - 1];
-          if (next) {
-            event.preventDefault();
-            activateTab(next);
-          } else if (event.key === 'Delete') {
-            event.preventDefault();
-            closeTab(file);
-          }
-        });
+        button.addEventListener('keydown', event => onTabKeydown(event, file));
         const close = document.createElement('button');
         close.type = 'button';
         close.className = 'tree-tab-close';
@@ -363,26 +383,117 @@
         panel.tabIndex = 0;
         const tree = document.createElement('ul');
         tree.className = 'tree-list';
-        tree.append(renderNode(fileRoots.get(file), expandRoot));
+        const views = new Map();
+        tree.append(renderNode(fileRoots.get(file), views, expandRoot));
         panel.append(tree);
         // Keep each panel mounted so notes and expanded branches survive tab switches.
-        tabs.set(file, { item, button, panel, scrollTop: 0, scrollLeft: 0 });
+        tabs.set(file, { item, button, panel, views, scrollTop: 0, scrollLeft: 0 });
         tabList.append(item);
         panels.append(panel);
       }
       activateTab(file, focus);
     }
 
-    for (const root of forest) {
-      const file = sourceFiles.get(root);
-      const reopen = document.createElement('button');
-      reopen.type = 'button';
-      reopen.className = 'tree-reopen';
-      reopen.textContent = `Open ${rootName(file)}`;
-      reopen.addEventListener('click', () => openTab(file));
-      empty.append(reopen);
-      openTab(file, false, false);
+    // Find just the requested path when a result is clicked; search stores no ancestry.
+    function findNodePath(id) {
+      const visited = new Set();
+      function visit(source, file) {
+        if (visited.has(source)) return null;
+        visited.add(source);
+        const step = { source, file };
+        if (source.id === id) return [step];
+        const continuation = continuationFileFor(source);
+        const children = continuation ? [fileRoots.get(continuation)] : resolve(source).children;
+        for (const child of children) {
+          const tail = visit(child, continuation || file);
+          if (tail) return [step, ...tail];
+        }
+        return null;
+      }
+      for (const root of forest) {
+        const path = visit(root, sourceFiles.get(root));
+        if (path) return path;
+      }
+      return null;
     }
+
+    let highlightedRow = null;
+    let highlightTimer;
+    function revealNode(id) {
+      const path = findNodePath(id);
+      if (!path) {
+        document.getElementById('tree-search-count').textContent = `Could not find a path to ${id}.`;
+        return;
+      }
+      let destination;
+      for (let i = 0; i < path.length; i++) {
+        const { source, file } = path[i];
+        if (activeTab !== file) openTab(file, false, false);
+        const tab = tabs.get(file);
+        const view = tab.views.get(source);
+        const next = path[i + 1];
+        if (next && next.file === file) view.expandChildren?.();
+        else {
+          // Leave each ancestor tab positioned at its continuation to the next file.
+          view.row.scrollIntoView({ block: 'center', inline: 'nearest' });
+        }
+        destination = view.row;
+      }
+      tabs.get(activeTab).button.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      destination.focus({ preventScroll: true });
+      if (highlightedRow) highlightedRow.classList.remove('search-target');
+      clearTimeout(highlightTimer);
+      highlightedRow = destination;
+      destination.classList.add('search-target');
+      highlightTimer = setTimeout(() => destination.classList.remove('search-target'), 1000);
+    }
+
+    function textFields(node) {
+      const notes = document.createElement('div');
+      appendNotes(notes, node.notes || '');
+      return [node.short_description || '', notes.textContent];
+    }
+
+    const searchEntries = new Map([...index].map(([id, node]) => [id, {
+      id, fields: [id, ...textFields(node)]
+    }]));
+    // Ref metadata belongs to the same searchable ID, rather than a duplicate result.
+    for (const node of nodes) {
+      let target = node;
+      while (target.ref && index.has(target.ref)) {
+        searchEntries.get(target.ref).fields.push(...textFields(node));
+        target = index.get(target.ref);
+      }
+    }
+    const entries = [...searchEntries.values()].sort((a, b) => a.id.localeCompare(b.id));
+    const input = document.getElementById('tree-search-input');
+    const results = document.getElementById('tree-search-results');
+    const count = document.getElementById('tree-search-count');
+    const noMatches = document.getElementById('tree-search-empty');
+
+    function updateSearch() {
+      const query = input.value;
+      const matches = entries.filter(entry => entry.fields.some(text => text.includes(query)));
+      results.replaceChildren(...matches.map(entry => {
+        const item = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'tree-search-result';
+        button.textContent = entry.id;
+        button.title = `Reveal ${entry.id} in the tree`;
+        button.addEventListener('click', () => revealNode(entry.id));
+        item.append(button);
+        return item;
+      }));
+      count.textContent = `${matches.length} of ${entries.length} nodes`;
+      noMatches.hidden = matches.length !== 0;
+      searchPanel.scrollTop = 0;
+      tabs.get(searchKey).scrollTop = 0;
+    }
+    input.addEventListener('input', updateSearch);
+    updateSearch();
+
+    for (const root of forest) openTab(sourceFiles.get(root), false, false);
     activateTab(sourceFiles.get(forest[0]), false);
   }
 

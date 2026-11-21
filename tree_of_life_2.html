@@ -39,12 +39,20 @@
     }
     .tree-tabs {
       display: flex;
-      gap: 0.3rem;
-      padding: 0.5rem 0.5rem 0;
-      overflow-x: auto;
+      align-items: stretch;
+      padding: 0 0.5rem;
       border-bottom: 1px solid #cbd3dc;
       background: #e9edf1;
     }
+    .tree-file-tabs {
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+      gap: 0.3rem;
+      overflow-x: auto;
+      padding-top: 0.5rem;
+    }
+    .tree-search-tab-item { margin-top: 0.5rem; margin-left: 0.4rem; }
     .tree-tab-item {
       display: flex;
       flex: 0 0 auto;
@@ -80,16 +88,46 @@
       overflow: auto;
       overscroll-behavior: contain;
     }
-    #tree-status, .tree-empty { margin: 0; padding: 1rem; }
-    .tree-reopen {
+    #tree-status { margin: 0; padding: 1rem; }
+    .tree-search-toolbar {
+      position: sticky;
+      top: -1rem;
+      z-index: 1;
+      padding: 0.25rem 0 0.5rem;
+      background: #f6f8fa;
+      border-bottom: 1px solid #ddd;
+    }
+    .tree-search-toolbar label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+    #tree-search-input {
+      box-sizing: border-box;
+      width: 100%;
       padding: 0.5rem 0.75rem;
       border: 1px solid #c1cad4;
       border-radius: 4px;
       background: #fff;
-      color: #245c98;
       font: inherit;
+      font-size: 1rem;
+    }
+    #tree-search-help, #tree-search-count { margin: 0.5rem 0 0; font-size: 0.875rem; color: #555; }
+    .tree-search-results { list-style: none; margin: 0; padding: 0; }
+    .tree-search-results li + li { border-top: 1px solid #e3e7eb; }
+    .tree-search-result {
+      display: block;
+      width: 100%;
+      min-height: 2.75rem;
+      padding: 0.6rem 0.4rem;
+      border: 0;
+      background: transparent;
+      color: #245c98;
+      font-family: ui-monospace, monospace;
+      font-size: 0.875rem;
+      text-align: left;
+      overflow-wrap: anywhere;
       cursor: pointer;
     }
+    .tree-search-result:hover { background: #e4effa; }
+    .tree-search-result:focus-visible { outline-offset: -3px; }
+    .node-row.search-target { background: #e4effa; box-shadow: 0 0 0 3px #e4effa; transition: none; }
     .tree-list {
       margin: 0;
       padding: 0;
@@ -97,6 +135,9 @@
     }
     .tree-node { min-width: 17rem; }
     .node-row {
+      border-radius: 4px;
+      box-shadow: 0 0 0 3px transparent;
+      transition: background-color 0.25s ease-out, box-shadow 0.25s ease-out;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -185,6 +226,7 @@
     [hidden] { display: none !important; }
     @media (max-width: 600px) {
       .tree-panel { padding: 0.75rem; }
+      .tree-search-toolbar { top: -0.75rem; }
       .tree-tab, .tree-tab-close { min-height: 2.75rem; }
       .tree-tab-close { min-width: 2.75rem; }
       .node-toggle { width: 2.75rem; height: 2.75rem; }
@@ -215,10 +257,25 @@
                   <h2 id="viewer-heading">Interactive tree</h2>
                   <p>Toggle notes and subclades with the icons. Branches continued in another file open in their own tab.</p>
                   <div class="tree-frame" role="region" aria-label="Interactive tree">
-                    <div id="tree-tabs" class="tree-tabs" role="tablist" aria-label="Open clades"></div>
+                    <div id="tree-tabs" class="tree-tabs" role="tablist" aria-label="Tree viewer">
+                      <div id="tree-file-tabs" class="tree-file-tabs" role="presentation"></div>
+                      <div id="tree-search-tab-item" class="tree-tab-item tree-search-tab-item" role="presentation">
+                        <button id="tree-search-tab" class="tree-tab" type="button" role="tab" aria-selected="false" aria-controls="tree-search-panel" tabindex="-1" disabled>Search</button>
+                      </div>
+                    </div>
                     <p id="tree-status" class="status" role="status">Loading tree…</p>
-                    <div id="tree-panels"></div>
-                    <div id="tree-empty" class="tree-empty" hidden><p>No clades are open.</p></div>
+                    <div id="tree-panels">
+                      <div id="tree-search-panel" class="tree-panel" role="tabpanel" aria-labelledby="tree-search-tab" tabindex="0" hidden>
+                        <div class="tree-search-toolbar">
+                          <label for="tree-search-input">Search nodes</label>
+                          <input id="tree-search-input" type="search" placeholder="Search IDs, descriptions, and notes" aria-describedby="tree-search-help" autocomplete="off" spellcheck="false">
+                          <p id="tree-search-help">Matches exact text, including capitalization. Select an ID to reveal its place in the tree.</p>
+                          <p id="tree-search-count" role="status" aria-live="polite" aria-atomic="true"></p>
+                        </div>
+                        <ul id="tree-search-results" class="tree-search-results"></ul>
+                        <p id="tree-search-empty" hidden>No matches.</p>
+                      </div>
+                    </div>
                   </div>
                 </section>
                 <noscript><p>Enable JavaScript to load the tree and YAML files.</p></noscript>
